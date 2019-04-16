@@ -3,6 +3,7 @@ import styles from "./App.module.scss";
 import Hero from "./components/Headers/Hero";
 import Footer from "./components/Headers/Footer";
 import SearchBar from "./components/SearchBar/SearchBar";
+import Results from "./components/Results/Results";
 
 class App extends Component {
   render() {
@@ -10,6 +11,7 @@ class App extends Component {
       <div className={styles.App}>
         <Hero />
         <SearchBar />
+        <Results />
         <Footer />
       </div>
     );
