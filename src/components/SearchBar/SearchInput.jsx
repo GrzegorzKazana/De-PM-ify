@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./ReactAutosuggestStyles.scss";
 import styles from "./SearchBar.module.scss";
 import { ReactComponent as SearchIcon } from "../../assets/search-icon.svg";
+import Spinner from "../Common/Spinner/Spinner";
 import Autosuggest from "react-autosuggest";
 import AvailableCountries from "../../config/AvailableCountries";
 
@@ -20,7 +21,7 @@ const getSuggestionValue = country => country;
 
 const renderSuggestion = suggestion => <div>{suggestion}</div>;
 
-const SearchInput = () => {
+const SearchInput = ({ loading }) => {
   const [suggestions, setSuggestions] = useState([]);
   const [value, setValue] = useState("");
 
@@ -46,7 +47,7 @@ const SearchInput = () => {
         inputProps={inputProps}
       />
       <button className={styles.SearchInput__Button}>
-        <SearchIcon />
+        {loading ? <Spinner /> : <SearchIcon />}
       </button>
     </form>
   );
