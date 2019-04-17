@@ -1,4 +1,10 @@
-import { FETCHING_CITIES, LOADED_CITIES } from "../actions/CitiesActions";
+import {
+  FETCHING_CITIES,
+  LOADED_CITIES,
+  FETCHING_CITY_DATA,
+  LOADED_CITY_DATA,
+  fetchCityData
+} from "../actions/CitiesActions";
 
 const defaultState = {
   cities: [],
@@ -19,6 +25,32 @@ const CitiesReducer = (state = defaultState, action) => {
         cities,
         citiesFetching: false,
         citiesLoaded: true
+      };
+    case FETCHING_CITY_DATA:
+      return {
+        ...state,
+        cities: state.cities.map(city =>
+          city.id !== action.cityId
+            ? city
+            : {
+                ...city,
+                dataFetching: true
+              }
+        )
+      };
+    case LOADED_CITY_DATA:
+      return {
+        ...state,
+        cities: state.cities.map(city =>
+          city.id !== action.cityId
+            ? city
+            : {
+                ...city,
+                data: fetchCityData,
+                dataFetching: true,
+                dataLoaded: true
+              }
+        )
       };
     default:
       return state;
