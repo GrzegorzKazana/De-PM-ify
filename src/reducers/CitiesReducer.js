@@ -25,6 +25,11 @@ const CitiesReducer = (state = defaultState, action) => {
         citiesFetching: false,
         citiesLoaded: true
       };
+    case FETCHING_CITIES_FAIL:
+      return {
+        ...state,
+        citiesFetching: false
+      };
     case FETCHING_CITY_DATA:
       return {
         ...state,
@@ -48,6 +53,19 @@ const CitiesReducer = (state = defaultState, action) => {
                 data: action.cityData,
                 dataFetching: false,
                 dataLoaded: true
+              }
+        )
+      };
+
+    case FETCHING_CITY_DATA_FAIL:
+      return {
+        ...state,
+        cities: state.cities.map(city =>
+          city.id !== action.cityId
+            ? city
+            : {
+                ...city,
+                dataFetching: false
               }
         )
       };

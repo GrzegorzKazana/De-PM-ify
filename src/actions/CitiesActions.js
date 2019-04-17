@@ -30,8 +30,9 @@ export const loadedCityData = (cityId, cityData) => ({
 });
 
 export const FETCHING_CITY_DATA_FAIL = "FETCHING_CITY_DATA_FAIL";
-export const fetchCityDataFail = () => ({
-  type: FETCHING_CITY_DATA_FAIL
+export const fetchCityDataFail = cityId => ({
+  type: FETCHING_CITY_DATA_FAIL,
+  cityId
 });
 
 export const fetchCountryData = (
