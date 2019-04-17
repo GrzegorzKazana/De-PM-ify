@@ -10,4 +10,9 @@
 }
 
 .SearchBar__Wrapper {
+  background-color: $secondary-color;
+  height: $searchbar-height;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

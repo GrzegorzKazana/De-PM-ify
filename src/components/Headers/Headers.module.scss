@@ -1,7 +1,15 @@
 @import "../../variables.scss";
 
 .Hero__wrapper {
+  min-height: 50vh;
+  background-color: $secondary-color;
+  color: $primary-color;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .Footer__wrapper {
+  background-color: $primary-color;
+  color: $secondary-color;
 }
