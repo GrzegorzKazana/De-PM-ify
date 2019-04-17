@@ -2,8 +2,7 @@ import {
   FETCHING_CITIES,
   LOADED_CITIES,
   FETCHING_CITY_DATA,
-  LOADED_CITY_DATA,
-  fetchCityData
+  LOADED_CITY_DATA
 } from "../actions/CitiesActions";
 
 export const defaultState = {
