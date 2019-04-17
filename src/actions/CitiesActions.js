@@ -1,3 +1,5 @@
+import { collectCities } from "../api/OpenAq";
+
 export const FETCHING_CITIES = "FETCHING_CITIES";
 export const fetchCities = () => ({
   type: FETCHING_CITIES
@@ -21,3 +23,13 @@ export const loadedCityData = (cityId, cityData) => ({
   cityId,
   cityData
 });
+
+export const fetchCountryData = (
+  countryCode,
+  resultLimit,
+  parameter
+) => dispatch => {
+  collectCities(countryCode, resultLimit, parameter)
+    .then(latest => console.log(latest))
+    .catch(err => console.log(err));
+};
