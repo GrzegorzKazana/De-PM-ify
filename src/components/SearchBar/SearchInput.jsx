@@ -14,13 +14,14 @@ const getSuggestions = value => {
   return inputLength === 0
     ? []
     : AvailableCountries.filter(
-        country => country.toLowerCase().slice(0, inputLength) === inputValue
+        country =>
+          country.name.toLowerCase().slice(0, inputLength) === inputValue
       );
 };
 
-const getSuggestionValue = country => country;
+const getSuggestionValue = country => country.name;
 
-const renderSuggestion = suggestion => <div>{suggestion}</div>;
+const renderSuggestion = suggestion => <div>{suggestion.name}</div>;
 
 const SearchInput = ({ loading }) => {
   const [suggestions, setSuggestions] = useState([]);
