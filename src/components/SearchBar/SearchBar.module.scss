@@ -18,6 +18,15 @@
   border-left: 0px;
   background-color: #fff;
   border-radius: 0px 4px 4px 0px;
+
+  &:hover,
+  &:focus {
+    background-color: $primary-color-light;
+  }
+
+  &:active {
+    background-color: $primary-color;
+  }
 }
 
 .SearchBar__Wrapper {

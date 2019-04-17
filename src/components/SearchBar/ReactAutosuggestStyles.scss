@@ -13,6 +13,10 @@
   font-size: 16px;
   border: 1px solid $primary-color-dark;
   border-radius: 4px 0px 0px 4px;
+
+  &:focus {
+    background-color: $primary-color-light;
+  }
 }
 
 .react-autosuggest__input--focused {
