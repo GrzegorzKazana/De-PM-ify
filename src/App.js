@@ -22,7 +22,7 @@ const App = props => (
       loading={props.citiesFetching}
       onSubmit={props.fetchCountryCities}
     />
-    <Results open={false} />
+    <Results open={props.citiesLoaded} cities={props.cities} />
     <Footer />
   </div>
 );

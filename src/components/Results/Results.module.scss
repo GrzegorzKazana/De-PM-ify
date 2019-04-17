@@ -7,9 +7,9 @@
 
 .Results__Body {
   max-width: 768px;
-  margin: 0px auto;
-  background-color: #fff;
+  margin: 64px auto;
   overflow: hidden;
+  transition: opacity 0.2s ease;
 
   &.Results__BodyOpen {
     height: auto;
@@ -19,4 +19,60 @@
     height: 0;
     opacity: 0;
   }
+}
+
+.CityDataCard__Wrapper {
+  background-color: #fff;
+  margin: 8px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.25);
+}
+
+.CityDataCard__Summary {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px;
+
+  svg {
+    width: 2rem;
+    height: 2rem;
+    transition: transform $animation-duration $animation-easing;
+  }
+
+  &[open] svg {
+    transform: rotate(180deg);
+  }
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+}
+
+.CityDataCard__Header {
+  flex-grow: 1;
+  padding: 0px 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  & .CityDataCard__Cityname {
+    font-size: 2rem;
+  }
+
+  & .CityDataCard__Parameter {
+  }
+
+  & .CityDataCard__Value {
+    font-weight: 600;
+    font-size: 1.3rem;
+  }
+
+  & .CityDataCard__Unit {
+  }
+}
+
+.CityDataCard__Content {
 }
