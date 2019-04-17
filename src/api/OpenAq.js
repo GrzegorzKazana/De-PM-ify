@@ -5,25 +5,26 @@ const latestEndpoint = "/latest";
 
 //formats result array to simpler form
 //discarding irrevelant data
-const formatResults = results =>
+export const formatResults = results =>
   results.map(res => ({
     country: res.country,
     city: res.city,
     location: res.location,
-    measurement: res.measurements[0].value,
+    parameter: res.measurements[0].parameter,
+    value: res.measurements[0].value,
     unit: res.measurements[0].unit
   }));
 
 //sorts result array by measurement in descending order
 //(worse air quality first)
-const sortResults = results =>
-  results.sort((resA, resB) => resB.measurement - resA.measurement);
+export const sortResults = results =>
+  results.sort((resA, resB) => resB.value - resA.value);
 
 //iterates the array and checks if current city has previous occurence with different measurement
 //skips duplicates, leaving occurence with worse params
 //assumes data is sorted by air quality
 //also, iteration ends if collected enough cities (reached limit)
-const limitAndFilterCityDuplicates = (results, limit) => {
+export const limitAndFilterCityDuplicates = (results, limit) => {
   const filteredResults = [];
   const resultsCities = results.map(res => res.city);
   for (
