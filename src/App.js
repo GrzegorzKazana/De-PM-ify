@@ -10,8 +10,8 @@ class App extends Component {
     return (
       <div className={styles.App}>
         <Hero />
-        <SearchBar />
-        <Results />
+        <SearchBar loading={false} />
+        <Results open={false} />
         <Footer />
       </div>
     );

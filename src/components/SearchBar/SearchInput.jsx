@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import "./ReactAutosuggestStyles.scss";
 import styles from "./SearchBar.module.scss";
 import { ReactComponent as SearchIcon } from "../../assets/search-icon.svg";
@@ -53,3 +54,7 @@ const SearchInput = ({ loading }) => {
   );
 };
 export default SearchInput;
+
+SearchInput.propTypes = {
+  loading: PropTypes.bool.isRequired
+};

@@ -2,7 +2,21 @@
 
 .Resuls__Wrapper {
   flex-grow: 1;
+  background: linear-gradient(to bottom, #222 25vh, #ddd 25vh);
 }
 
 .Results__Body {
+  max-width: 768px;
+  margin: 0px auto;
+  background-color: #fff;
+  overflow: hidden;
+
+  &.Results__BodyOpen {
+    height: auto;
+    opacity: 1;
+  }
+  &.Results__BodyClosed {
+    height: 0;
+    opacity: 0;
+  }
 }
