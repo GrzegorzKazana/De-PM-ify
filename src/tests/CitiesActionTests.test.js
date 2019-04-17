@@ -1,12 +1,16 @@
 import {
   FETCHING_CITIES,
   LOADED_CITIES,
+  FETCHING_CITIES_FAIL,
   FETCHING_CITY_DATA,
   LOADED_CITY_DATA,
+  FETCHING_CITY_DATA_FAIL,
   fetchCities,
   loadedCities,
+  fetchCitiesFail,
   fetchCityData,
-  loadedCityData
+  loadedCityData,
+  fetchCityDataFail
 } from "../actions/CitiesActions";
 
 describe("testing city actions", () => {
@@ -31,6 +35,13 @@ describe("testing city actions", () => {
     expect(loadedCities(cities)).toEqual(expectedAction);
   });
 
+  it("creates fetching cities fail action", () => {
+    const expectedAction = {
+      type: FETCHING_CITIES_FAIL
+    };
+    expect(fetchCitiesFail()).toEqual(expectedAction);
+  });
+
   it("creates fetching city data action", () => {
     const cityId = 3;
     const expectedAction = {
@@ -51,5 +62,14 @@ describe("testing city actions", () => {
       cityData
     };
     expect(loadedCityData(cityId, cityData)).toEqual(expectedAction);
+  });
+
+  it("creates fetching city data fail action", () => {
+    const cityId = 3;
+    const expectedAction = {
+      type: FETCHING_CITY_DATA_FAIL,
+      cityId
+    };
+    expect(fetchCityDataFail(cityId)).toEqual(expectedAction);
   });
 });
