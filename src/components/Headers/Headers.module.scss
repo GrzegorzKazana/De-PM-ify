@@ -13,3 +13,22 @@
   background-color: $primary-color;
   color: $secondary-color;
 }
+
+.Footer__button {
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  outline: 0;
+}
+
+.Footer__icon {
+  width: 100px;
+  fill: $secondary-color;
+
+  &:hover,
+  &:focus,
+  &:active {
+    fill: $secondary-color-dark;
+  }
+}
