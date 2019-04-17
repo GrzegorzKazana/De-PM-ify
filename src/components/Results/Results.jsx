@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styles from "./Results.module.scss";
 
 const Results = ({ open }) => (
@@ -109,3 +110,7 @@ const Results = ({ open }) => (
   </main>
 );
 export default Results;
+
+Results.propTypes = {
+  open: PropTypes.bool.isRequired
+};
