@@ -1,10 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./SearchBar.module.scss";
+import Autosuggest from "react-autosuggest";
+import AvailableCountries from "../../config/AvailableCountries";
 
-const SearchInput = () => (
-  <form className={styles.SearchInput__Wrapper}>
-    <input type="text" className={styles.SearchInput__Input} />
-    <button className={styles.SearchInput__Button}>Search</button>
-  </form>
-);
+const getSuggestions = value => {
+  const inputValue = value.trim().toLowerCase();
+  const inputLength = inputValue.length;
+
+  return inputLength === 0
+    ? []
+    : AvailableCountries.filter(
+        country => country.toLowerCase().slice(0, inputLength) === inputValue
+      );
+};
+
+const getSuggestionValue = country => country;
+
+const renderSuggestion = suggestion => <div>{suggestion}</div>;
+
+const SearchInput = () => {
+  const [suggestions, setSuggestions] = useState([]);
+  const [value, setValue] = useState("");
+
+  const onInputChange = (e, { newValue }) => setValue(newValue);
+  const onSuggestionsFetchRequested = ({ value }) =>
+    setSuggestions(getSuggestions(value));
+  const onSuggestionsClearRequested = () => setSuggestions([]);
+
+  const inputProps = {
+    placeholder: "Type country name",
+    value,
+    onChange: onInputChange
+  };
+
+  console.log(AvailableCountries);
+
+  return (
+    <form className={styles.SearchInput__Wrapper}>
+      {/* <input type="text" className={styles.SearchInput__Input} /> */}
+      <Autosuggest
+        suggestions={suggestions}
+        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+        onSuggestionsClearRequested={onSuggestionsClearRequested}
+        getSuggestionValue={getSuggestionValue}
+        renderSuggestion={renderSuggestion}
+        inputProps={inputProps}
+      />
+      <button className={styles.SearchInput__Button}>Search</button>
+    </form>
+  );
+};
 export default SearchInput;
