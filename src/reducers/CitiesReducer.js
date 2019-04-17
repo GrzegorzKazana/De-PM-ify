@@ -6,7 +6,7 @@ import {
   fetchCityData
 } from "../actions/CitiesActions";
 
-const defaultState = {
+export const defaultState = {
   cities: [],
   citiesFetching: false,
   citiesLoaded: false
