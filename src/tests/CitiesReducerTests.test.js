@@ -2,8 +2,10 @@ import CitiesReducer, { defaultState } from "../reducers/CitiesReducer";
 import {
   fetchCities,
   loadedCities,
+  fetchCitiesFail,
   fetchCityData,
-  loadedCityData
+  loadedCityData,
+  fetchCityDataFail
 } from "../actions/CitiesActions";
 
 describe("testing city reducer", () => {
@@ -40,6 +42,17 @@ describe("testing city reducer", () => {
       citiesLoaded: true
     };
     const action = loadedCities(cities);
+    expect(CitiesReducer(initialState, action)).toEqual(expectedState);
+  });
+
+  it("handles fetchCityFail action", () => {
+    const initialState = defaultState;
+    const expectedState = {
+      cities: [],
+      citiesFetching: false,
+      citiesLoaded: false
+    };
+    const action = fetchCitiesFail();
     expect(CitiesReducer(initialState, action)).toEqual(expectedState);
   });
 
@@ -91,6 +104,29 @@ describe("testing city reducer", () => {
       citiesLoaded: true
     };
     const action = loadedCityData(cityId, cityData);
+    expect(CitiesReducer(initialState, action)).toEqual(expectedState);
+  });
+
+  it("handles fetchCityDataFail action", () => {
+    const initialState = {
+      cities,
+      citiesFetching: false,
+      citiesLoaded: true
+    };
+    const cityId = 0;
+    const expectedState = {
+      cities: [
+        {
+          id: 0,
+          name: "Gliwice",
+          dataFetching: false
+        },
+        { id: 1, name: "Katowice" }
+      ],
+      citiesFetching: false,
+      citiesLoaded: true
+    };
+    const action = fetchCityDataFail(cityId);
     expect(CitiesReducer(initialState, action)).toEqual(expectedState);
   });
 });

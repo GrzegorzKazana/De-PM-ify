@@ -1,3 +1,5 @@
+import { collectCities } from "../api/OpenAq";
+
 export const FETCHING_CITIES = "FETCHING_CITIES";
 export const fetchCities = () => ({
   type: FETCHING_CITIES
@@ -7,6 +9,11 @@ export const LOADED_CITIES = "LOADED_CITIES";
 export const loadedCities = cities => ({
   type: LOADED_CITIES,
   cities
+});
+
+export const FETCHING_CITIES_FAIL = "FETCHING_CITIES_FAIL";
+export const fetchCitiesFail = () => ({
+  type: FETCHING_CITIES_FAIL
 });
 
 export const FETCHING_CITY_DATA = "FETCHING_CITY_DATA";
@@ -21,3 +28,25 @@ export const loadedCityData = (cityId, cityData) => ({
   cityId,
   cityData
 });
+
+export const FETCHING_CITY_DATA_FAIL = "FETCHING_CITY_DATA_FAIL";
+export const fetchCityDataFail = cityId => ({
+  type: FETCHING_CITY_DATA_FAIL,
+  cityId
+});
+
+export const fetchCountryData = (
+  countryCode,
+  resultLimit,
+  parameter
+) => dispatch => {
+  dispatch(fetchCities());
+  collectCities(countryCode, resultLimit, parameter)
+    .then(cities => {
+      dispatch(loadedCities(cities));
+    })
+    .catch(err => {
+      dispatch(fetchCitiesFail());
+      console.log(err);
+    });
+};
