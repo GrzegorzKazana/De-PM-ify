@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import "./ReactAutosuggestStyles.scss";
 import styles from "./SearchBar.module.scss";
+import { ReactComponent as SearchIcon } from "../../assets/search-icon.svg";
 import Autosuggest from "react-autosuggest";
 import AvailableCountries from "../../config/AvailableCountries";
 
@@ -33,11 +35,8 @@ const SearchInput = () => {
     onChange: onInputChange
   };
 
-  console.log(AvailableCountries);
-
   return (
     <form className={styles.SearchInput__Wrapper}>
-      {/* <input type="text" className={styles.SearchInput__Input} /> */}
       <Autosuggest
         suggestions={suggestions}
         onSuggestionsFetchRequested={onSuggestionsFetchRequested}
@@ -46,7 +45,9 @@ const SearchInput = () => {
         renderSuggestion={renderSuggestion}
         inputProps={inputProps}
       />
-      <button className={styles.SearchInput__Button}>Search</button>
+      <button className={styles.SearchInput__Button}>
+        <SearchIcon />
+      </button>
     </form>
   );
 };

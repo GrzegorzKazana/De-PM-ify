@@ -1,18 +1,30 @@
 @import "../../variables.scss";
 
 .SearchInput__Wrapper {
-}
-
-.SearchInput__Input {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .SearchInput__Button {
+  height: 42px;
+  width: 42px;
+  background: none;
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  border: 1px solid $primary-color-dark;
+  border-left: 0px;
+  background-color: #fff;
+  border-radius: 0px 4px 4px 0px;
 }
 
 .SearchBar__Wrapper {
   background-color: $secondary-color;
   height: $searchbar-height;
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
 }
