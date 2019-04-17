@@ -34,13 +34,12 @@ describe("testing city reducer", () => {
 
   it("handles loadedCities action", () => {
     const initialState = defaultState;
-
     const expectedState = {
       cities,
       citiesFetching: false,
       citiesLoaded: true
     };
-    const action = loadedCities();
+    const action = loadedCities(cities);
     expect(CitiesReducer(initialState, action)).toEqual(expectedState);
   });
 
@@ -91,7 +90,7 @@ describe("testing city reducer", () => {
       citiesFetching: false,
       citiesLoaded: true
     };
-    const action = fetchCityData(cityId, cityData);
+    const action = loadedCityData(cityId, cityData);
     expect(CitiesReducer(initialState, action)).toEqual(expectedState);
   });
 });

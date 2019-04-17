@@ -22,7 +22,7 @@ const CitiesReducer = (state = defaultState, action) => {
     case LOADED_CITIES:
       return {
         ...state,
-        cities,
+        cities: action.cities,
         citiesFetching: false,
         citiesLoaded: true
       };
@@ -46,8 +46,8 @@ const CitiesReducer = (state = defaultState, action) => {
             ? city
             : {
                 ...city,
-                data: fetchCityData,
-                dataFetching: true,
+                data: action.cityData,
+                dataFetching: false,
                 dataLoaded: true
               }
         )
