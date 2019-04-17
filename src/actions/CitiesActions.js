@@ -11,6 +11,11 @@ export const loadedCities = cities => ({
   cities
 });
 
+export const FETCHING_CITIES_FAIL = "FETCHING_CITIES_FAIL";
+export const fetchCitiesFail = () => ({
+  type: FETCHING_CITIES_FAIL
+});
+
 export const FETCHING_CITY_DATA = "FETCHING_CITY_DATA";
 export const fetchCityData = cityId => ({
   type: FETCHING_CITY_DATA,
@@ -24,12 +29,20 @@ export const loadedCityData = (cityId, cityData) => ({
   cityData
 });
 
+export const FETCHING_CITY_DATA_FAIL = "FETCHING_CITY_DATA_FAIL";
+export const fetchCityDataFail = () => ({
+  type: FETCHING_CITY_DATA_FAIL
+});
+
 export const fetchCountryData = (
   countryCode,
   resultLimit,
   parameter
 ) => dispatch => {
+  dispatch(fetchCities());
   collectCities(countryCode, resultLimit, parameter)
-    .then(latest => console.log(latest))
+    .then(cities => {
+      dispatch(loadedCities(cities));
+    })
     .catch(err => console.log(err));
 };
