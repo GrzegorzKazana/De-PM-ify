@@ -1,8 +1,10 @@
 import {
   FETCHING_CITIES,
   LOADED_CITIES,
+  FETCHING_CITIES_FAIL,
   FETCHING_CITY_DATA,
-  LOADED_CITY_DATA
+  LOADED_CITY_DATA,
+  FETCHING_CITY_DATA_FAIL
 } from "../actions/CitiesActions";
 
 export const defaultState = {
