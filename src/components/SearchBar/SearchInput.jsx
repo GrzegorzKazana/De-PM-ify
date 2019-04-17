@@ -23,23 +23,41 @@ const getSuggestionValue = country => country.name;
 
 const renderSuggestion = suggestion => <div>{suggestion.name}</div>;
 
-const SearchInput = ({ loading }) => {
+const SearchInput = ({ loading, onSubmit }) => {
   const [suggestions, setSuggestions] = useState([]);
   const [value, setValue] = useState("");
+  const [inputValid, setInputValid] = useState(true);
 
-  const onInputChange = (e, { newValue }) => setValue(newValue);
+  const onInputChange = (e, { newValue }) => {
+    setInputValid(true);
+    setValue(newValue);
+  };
   const onSuggestionsFetchRequested = ({ value }) =>
     setSuggestions(getSuggestions(value));
   const onSuggestionsClearRequested = () => setSuggestions([]);
+  const handleSubmit = e => {
+    const choosenCountry = AvailableCountries.find(
+      country => country.name.toLowerCase() === value.trim().toLowerCase()
+    );
+    if (choosenCountry) {
+      onSubmit(choosenCountry.code);
+    } else {
+      setInputValid(false);
+    }
+    e.preventDefault();
+  };
 
   const inputProps = {
     placeholder: "Type country name",
     value,
-    onChange: onInputChange
+    onChange: onInputChange,
+    className: `react-autosuggest__input${
+      inputValid ? "" : " react-autosuggest__input--error"
+    }`
   };
 
   return (
-    <form className={styles.SearchInput__Wrapper}>
+    <form className={styles.SearchInput__Wrapper} onSubmit={handleSubmit}>
       <Autosuggest
         suggestions={suggestions}
         onSuggestionsFetchRequested={onSuggestionsFetchRequested}
@@ -57,5 +75,6 @@ const SearchInput = ({ loading }) => {
 export default SearchInput;
 
 SearchInput.propTypes = {
-  loading: PropTypes.bool.isRequired
+  loading: PropTypes.bool.isRequired,
+  onSubmit: PropTypes.func.isRequired
 };

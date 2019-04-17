@@ -12,13 +12,16 @@ import { fetchCountryData } from "./actions/CitiesActions";
 const mapStateToProps = state => state;
 
 const mapDispatchToProps = dispatch => ({
-  fetchCountryCities: () => dispatch(fetchCountryData("PL", 10))
+  fetchCountryCities: countryCode => dispatch(fetchCountryData(countryCode, 10))
 });
 
 const App = props => (
-  <div className={styles.App} onClick={props.fetchCountryCities}>
+  <div className={styles.App}>
     <Hero />
-    <SearchBar loading={false} />
+    <SearchBar
+      loading={props.citiesFetching}
+      onSubmit={props.fetchCountryCities}
+    />
     <Results open={false} />
     <Footer />
   </div>
