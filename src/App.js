@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import styles from "./App.module.scss";
 import Hero from "./components/Headers/Hero";
 import Footer from "./components/Headers/Footer";
@@ -8,26 +9,26 @@ import Results from "./components/Results/Results";
 import { connect } from "react-redux";
 import { fetchCountryData } from "./actions/CitiesActions";
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => state;
 
 const mapDispatchToProps = dispatch => ({
-  fetchCountryData_: () => dispatch(fetchCountryData("PL", -1))
+  fetchCountryCities: () => dispatch(fetchCountryData("PL", 10))
 });
 
-class App extends Component {
-  render() {
-    return (
-      <div className={styles.App} onClick={this.props.fetchCountryData_}>
-        <Hero />
-        <SearchBar loading={false} />
-        <Results open={false} />
-        <Footer />
-      </div>
-    );
-  }
-}
+const App = props => (
+  <div className={styles.App} onClick={props.fetchCountryCities}>
+    <Hero />
+    <SearchBar loading={false} />
+    <Results open={false} />
+    <Footer />
+  </div>
+);
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(App);
+
+App.propTypes = {
+  fetchCountryCities: PropTypes.func.isRequired
+};

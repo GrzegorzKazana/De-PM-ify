@@ -45,5 +45,8 @@ export const fetchCountryData = (
     .then(cities => {
       dispatch(loadedCities(cities));
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      dispatch(fetchCitiesFail());
+      console.log(err);
+    });
 };
