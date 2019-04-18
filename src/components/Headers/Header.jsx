@@ -3,7 +3,7 @@ import styles from "./Headers.module.scss";
 
 const Header = () => (
   <header className={styles.Hero__wrapper}>
-    <h1>Lorem ipsum</h1>
+    <h1>De-PM-ify</h1>
   </header>
 );
 export default Header;

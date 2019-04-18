@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./styles/CityDataCardContent.module.scss";
 import Spinner from "../Common/Spinner/Spinner";
+import { openLink } from "../../utils/OpenLink";
 import { wikiSearchUrl } from "../../config/Urls";
 import { cityPropTypes } from "./CityDataCard";
 import { TextButton } from "../Common/Buttons/Buttons";
@@ -11,10 +12,7 @@ const CityDataContentCardCorrect = ({ city }) => (
       {city.dataLoaded && <p>{city.data.articleSummary}</p>}
     </div>
     <div className={styles.CityDataCard__ContentFooter}>
-      <TextButton
-        text="more"
-        onClick={() => window.open(city.data.articleUrl, "_blank")}
-      />
+      <TextButton text="more" onClick={() => openLink(city.data.articleUrl)} />
     </div>
   </>
 );
@@ -28,7 +26,7 @@ const CityDataContentCardAmbigious = ({ city }) => (
     <div className={styles.CityDataCard__ContentFooter}>
       <TextButton
         text="let me clear this up"
-        onClick={() => window.open(city.data.articleUrl, "_blank")}
+        onClick={() => openLink(city.data.articleUrl)}
       />
     </div>
   </>
@@ -42,7 +40,7 @@ const CityDataContentCardInvalid = ({ city }) => (
     <div className={styles.CityDataCard__ContentFooter}>
       <TextButton
         text="let me handle that"
-        onClick={() => window.open(wikiSearchUrl + city.city, "_blank")}
+        onClick={() => openLink(city.data.articleUrl)}
       />
     </div>
   </>
