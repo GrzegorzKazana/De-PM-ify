@@ -1,4 +1,4 @@
-import { stringifyRequest } from "./Common";
+import { stringifyUrlRequest } from "../utils/StringifyUrlRequest";
 import { assessCityDataQuiality } from "../utils/WikiDataPipelineHelpers";
 
 const baseUrl = "https://en.wikipedia.org/w/api.php";
@@ -10,7 +10,7 @@ export const fetchCityWikiData = async title => {
     origin: "*",
     search: title
   };
-  const url = stringifyRequest(baseUrl, params);
+  const url = stringifyUrlRequest(baseUrl, params);
   try {
     const titlesResponse = await fetch(url);
     const titlesJson = await titlesResponse.json();
