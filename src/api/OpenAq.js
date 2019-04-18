@@ -23,12 +23,12 @@ export const fetchCitiesOpenAq = async (
     const latestResponse = await fetch(url);
     const latestJson = await latestResponse.json();
     const results = latestJson.results;
-    const resultsFormatted = formatResults(results);
-    const sortedResults = sortResults(resultsFormatted);
-    const filteredResults = limitAndFilterCityDuplicates(sortedResults, limit);
-    const citiesNameFormatted = formatCityNames(filteredResults);
-    const wrappedResults = wrapCitiesWithIdEmptyData(citiesNameFormatted);
-    return wrappedResults;
+    const citiesFormatted = formatResults(results);
+    const citiesNameFormatted = formatCityNames(citiesFormatted);
+    const sortedCities = sortResults(citiesNameFormatted);
+    const filteredCities = limitAndFilterCityDuplicates(sortedCities, limit);
+    const wrappedCities = wrapCitiesWithIdEmptyData(filteredCities);
+    return wrappedCities;
   } catch (err) {
     return [];
   }
