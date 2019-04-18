@@ -74,37 +74,3 @@
   & .CityDataCard__Unit {
   }
 }
-
-.CityDataCard__Content {
-  min-height: $city-details-min-height;
-  padding: 16px 16px;
-  text-align: justify;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  & .CityDataCard__ContentMain {
-    flex-grow: 1;
-  }
-
-  & .CityDataCard__ContentFooter {
-    text-align: right;
-  }
-
-  & .CityDataCard__ContentMainAmbigious {
-    flex-grow: 1;
-
-    & div {
-      font-weight: 600;
-      text-align: center;
-    }
-  }
-
-  & .CityDataCard__ContentMainFailed {
-    flex-grow: 1;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
