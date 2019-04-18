@@ -6,6 +6,8 @@ const findArticleTitle = async title => {
   const params = {
     action: "opensearch",
     format: "json",
+    origin: "*",
+
     search: title
   };
   const url = stringifyRequest(baseUrl, params);
@@ -19,45 +21,36 @@ const findArticleTitle = async title => {
   };
 };
 
-const fetchArticlesSummary = async articleTitles => {
+const fetchArticleSummary = async title => {
   const params = {
-    prop: "extracts&exintro&explaintext",
+    prop: ["extracts", "exintro", "explaintext"],
     redirects: 1,
     action: "query",
     format: "json",
-    titles: articleTitles.join("|")
+    origin: "*",
+    titles: title
   };
   const url = stringifyRequest(baseUrl, params);
   const summaryResponse = await fetch(url);
   const summaryJson = await summaryResponse.json();
-  const pageIds = Object.keys(summaryJson.query.pages);
-  const articleTitles = pageIds.map(id => summaryJson.query.pages[id].title);
-  const articleSummaries = pageIds.map(
-    id => summaryJson.query.pages[id].extract
-  );
-  return articleTitles.map((title, idx) => ({
-    articleTitle: title,
-    articleSummary: articleSummaries[idx]
-  }));
+  const pageId = Object.keys(summaryJson.query.pages)[0];
+  const articleTitle = summaryJson.query.pages[pageId].title;
+  const articleSummary = summaryJson.query.pages[pageId].extract;
+  return {
+    articleTitle: articleTitle,
+    articleSummary: articleSummary
+  };
 };
 
-const fetchCitiesData = async cities => {
-  const cityArticleTitlesUrls = cities.map(
-    async city => await findArticleTitle(city)
-  );
-  const cityArticleTitles = cityArticleTitlesUrls.map(
-    cityAT => cityAT.articleTitle
-  );
-  const cityArticleTitlesSummaries = await fetchArticlesSummary(
-    cityArticleTitles
-  );
+export const fetchCityWikiData = async cityName => {
+  const cityArticleTitleUrl = await findArticleTitle(cityName);
+  const cityArticleTitle = cityArticleTitleUrl.articleTitle;
+  const cityArticleTitleSummary = await fetchArticleSummary(cityArticleTitle);
   //merge cityArticleTitlesUrls with cityArticleTitlesSummaries
   //based on Title key
-  const cityArticleTitlesUrlsSummaries = cityArticleTitlesUrls.map(cityATU => ({
-    ...cityATU,
-    ...cityArticleTitlesSummaries.find(
-      cityATS => cityATS.articleTitle === cityATU.articleTitle
-    )
-  }));
-  return cityArticleTitlesUrlsSummaries;
+  const cityArticleTitleUrlSummary = {
+    ...cityArticleTitleUrl,
+    ...cityArticleTitleSummary
+  };
+  return cityArticleTitleUrlSummary;
 };
