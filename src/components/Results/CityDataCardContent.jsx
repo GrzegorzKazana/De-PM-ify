@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./styles/CityDataCardContent.module.scss";
+import { cityPropTypes } from "./CityDataCard";
 import { TextButton } from "../Common/Buttons/Buttons";
 import { cityKeywords } from "../../config/CityKeywords";
 
@@ -69,3 +70,19 @@ const CityDataContent = ({ city }) => (
   </div>
 );
 export default CityDataContent;
+
+CityDataContent.propTypes = {
+  ...cityPropTypes
+};
+
+CityDataContentCorrect.propTypes = {
+  ...cityPropTypes
+};
+
+CityDataContentAmbigious.propTypes = {
+  ...cityPropTypes
+};
+
+CityDataContentFailed.propTypes = {
+  ...cityPropTypes
+};

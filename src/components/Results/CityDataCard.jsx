@@ -22,15 +22,15 @@ const CityDataSummary = ({ city }) => (
   </summary>
 );
 
-const CityDataCard = ({ city }) => (
+const CityDataCard = props => (
   <details className={styles.CityDataCard__Wrapper}>
-    <CityDataSummary city={city} />
-    <CityDataContent city={city} />
+    <CityDataSummary {...props} />
+    <CityDataContent {...props} />
   </details>
 );
 export default CityDataCard;
 
-const cityPropTypes = {
+export const cityPropTypes = {
   city: PropTypes.shape({
     country: PropTypes.string.isRequired,
     city: PropTypes.string.isRequired,
@@ -42,10 +42,6 @@ const cityPropTypes = {
 };
 
 CityDataSummary.propTypes = {
-  ...cityPropTypes
-};
-
-CityDataContent.propTypes = {
   ...cityPropTypes
 };
 
