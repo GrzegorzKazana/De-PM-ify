@@ -50,13 +50,9 @@ const CityDataContentCardFailed = ({ city }) => (
 const CityDataCardContent = ({ city }) => {
   return (
     <div className={styles.CityDataCard__Content}>
-      {city.data && city.data.isCorrect && (
-        <CityDataContentCardCorrect city={city} />
-      )}
-      {city.data && city.data.isAmbigious && (
-        <CityDataContentCardAmbigious city={city} />
-      )}
-      {(!city.data || !city.data.isInvalid) && (
+      {city.data.isCorrect && <CityDataContentCardCorrect city={city} />}
+      {city.data.isAmbigious && <CityDataContentCardAmbigious city={city} />}
+      {(city.data.isInvalid === undefined || city.data.isInvalid) && (
         <CityDataContentCardFailed city={city} />
       )}
     </div>
