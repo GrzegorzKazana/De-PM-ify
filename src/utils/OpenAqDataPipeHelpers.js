@@ -1,7 +1,9 @@
 import {
   removeOccurencesInString,
-  fixCapitalization
+  fixCapitalization,
+  takeUntilChar
 } from "../utils/StringManipulation";
+import { redundantCityPrefixes } from "../config/RedundantCityPrefixes";
 
 //formats result array to simpler form
 //discarding irrevelant data
@@ -44,7 +46,13 @@ export const limitAndFilterCityDuplicates = (results, limit) => {
 export const formatCityNames = cities =>
   cities.map(city => ({
     ...city,
-    city: fixCapitalization(removeOccurencesInString(city.city, ["AIR "]))
+    city: takeUntilChar(
+      removeOccurencesInString(
+        fixCapitalization(city.city),
+        redundantCityPrefixes
+      ),
+      "/"
+    )
   }));
 
 //adds id, empty data and fetch status to city objects
