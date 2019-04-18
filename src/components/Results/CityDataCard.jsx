@@ -22,14 +22,60 @@ const CityDataSummary = ({ city }) => (
   </summary>
 );
 
-const CityDataContent = ({ city }) => (
-  <div className={styles.CityDataCard__Content}>
+const CityDataContentCorrect = ({ city }) => (
+  <>
     <div className={styles.CityDataCard__ContentMain}>
       {city.dataLoaded && <p>{city.data.articleSummary}</p>}
     </div>
     <div className={styles.CityDataCard__ContentFooter}>
-      <TextButton text="more" />
+      <TextButton
+        text="more"
+        onClick={() => window.open(city.data.articleUrl, "_blank")}
+      />
     </div>
+  </>
+);
+
+const CityDataContentAmbigious = ({ city }) => (
+  <>
+    <div className={styles.CityDataCard__ContentMainAmbigious}>
+      <p>{city.data.articleSummary}</p>
+      <div>This seems a little ambigious, was it what you are looking for?</div>
+    </div>
+    <div className={styles.CityDataCard__ContentFooter}>
+      <TextButton
+        text="let me clear this up"
+        onClick={() => window.open(city.data.articleUrl, "_blank")}
+      />
+    </div>
+  </>
+);
+
+const CityDataContentFailed = ({ city }) => (
+  <>
+    <div className={styles.CityDataCard__ContentMainFailed}>
+      <p>Oops! It seems we could not find data you are looking for...</p>
+    </div>
+    <div className={styles.CityDataCard__ContentFooter}>
+      <TextButton
+        text="let me handle that"
+        onClick={() => window.open(city.data.articleUrl, "_blank")}
+      />
+    </div>
+  </>
+);
+
+const CityDataContent = ({ city }) => (
+  <div className={styles.CityDataCard__Content}>
+    {city.dataLoaded ? (
+      city.data.articleSummary.includes("refer") ? (
+        <CityDataContentAmbigious city={city} />
+      ) : (
+        <CityDataContentCorrect city={city} />
+      )
+    ) : (
+      <CityDataContentFailed city={city} />
+    )}
   </div>
 );
 
