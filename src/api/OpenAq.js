@@ -5,9 +5,7 @@ import {
   limitAndFilterCityDuplicates,
   wrapCitiesWithIdEmptyData
 } from "../utils/OpenAqDataPipeHelpers";
-
-const baseUrl = "https://api.openaq.org/v1";
-const latestEndpoint = "/latest";
+import { openAqLatestApi } from "../config/Urls";
 
 export const fetchCitiesOpenAq = async (
   countryCode,
@@ -19,7 +17,7 @@ export const fetchCitiesOpenAq = async (
     parameter: parameter,
     limit: 10000
   };
-  const url = stringifyUrlRequest(baseUrl + latestEndpoint, params);
+  const url = stringifyUrlRequest(openAqLatestApi, params);
   try {
     const latestResponse = await fetch(url);
     const latestJson = await latestResponse.json();

@@ -1,7 +1,6 @@
 import { stringifyUrlRequest } from "../utils/StringifyUrlRequest";
 import { assessCityDataQuiality } from "../utils/WikiDataPipelineHelpers";
-
-const baseUrl = "https://en.wikipedia.org/w/api.php";
+import { wikiOpenSearchApi } from "../config/Urls";
 
 export const fetchCityWikiData = async title => {
   const params = {
@@ -10,7 +9,7 @@ export const fetchCityWikiData = async title => {
     origin: "*",
     search: title
   };
-  const url = stringifyUrlRequest(baseUrl, params);
+  const url = stringifyUrlRequest(wikiOpenSearchApi, params);
   try {
     const titlesResponse = await fetch(url);
     const titlesJson = await titlesResponse.json();

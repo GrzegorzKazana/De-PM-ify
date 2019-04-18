@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./styles/CityDataCardContent.module.scss";
 import Spinner from "../Common/Spinner/Spinner";
-
+import { wikiSearchUrl } from "../../config/Urls";
 import { cityPropTypes } from "./CityDataCard";
 import { TextButton } from "../Common/Buttons/Buttons";
 
@@ -34,7 +34,6 @@ const CityDataContentCardAmbigious = ({ city }) => (
   </>
 );
 
-const wikiSearchUrl = "https://en.wikipedia.org/w/index.php?search=";
 const CityDataContentCardInvalid = ({ city }) => (
   <>
     <div className={styles.CityDataCard__ContentMainFailed}>
