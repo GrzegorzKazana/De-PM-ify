@@ -2,9 +2,7 @@ import React from "react";
 import styles from "./styles/CityDataCardContent.module.scss";
 import { cityPropTypes } from "./CityDataCard";
 import { TextButton } from "../Common/Buttons/Buttons";
-import { cityKeywords } from "../../config/CityKeywords";
 
-const isDataCorrect = city => city.dataLoaded && city.data.articleSummary;
 const CityDataContentCardCorrect = ({ city }) => (
   <>
     <div className={styles.CityDataCard__ContentMain}>
@@ -19,13 +17,6 @@ const CityDataContentCardCorrect = ({ city }) => (
   </>
 );
 
-//if wiki text contains "refer" or does not contain any of city keywords
-//its marked as ambigious
-const isDataAmbigious = city =>
-  city.data.articleSummary.includes("refer") ||
-  !cityKeywords
-    .map(keyword => city.data.articleSummary.includes(keyword))
-    .some(x => x);
 const CityDataContentCardAmbigious = ({ city }) => (
   <>
     <div className={styles.CityDataCard__ContentMainAmbigious}>
@@ -57,17 +48,19 @@ const CityDataContentCardFailed = ({ city }) => (
 );
 
 const CityDataCardContent = ({ city }) => {
-  const content = isDataCorrect(city) ? (
-    isDataAmbigious(city) ? (
-      <CityDataContentCardAmbigious city={city} />
-    ) : (
-      <CityDataContentCardCorrect city={city} />
-    )
-  ) : (
-    <CityDataContentCardFailed city={city} />
+  return (
+    <div className={styles.CityDataCard__Content}>
+      {city.data && city.data.isCorrect && (
+        <CityDataContentCardCorrect city={city} />
+      )}
+      {city.data && city.data.isAmbigious && (
+        <CityDataContentCardAmbigious city={city} />
+      )}
+      {(!city.data || !city.data.isInvalid) && (
+        <CityDataContentCardFailed city={city} />
+      )}
+    </div>
   );
-
-  return <div className={styles.CityDataCard__Content}>{content}</div>;
 };
 export default CityDataCardContent;
 
