@@ -41,7 +41,7 @@ export const limitAndFilterCityDuplicates = (results, limit) => {
   return filteredResults;
 };
 
-export const collectCities = async (
+export const fetchCitiesOpenAq = async (
   countryCode,
   limit = 10,
   parameter = "pm25"
@@ -52,11 +52,15 @@ export const collectCities = async (
     limit: 10000
   };
   const url = stringifyRequest(baseUrl + latestEndpoint, params);
-  const latestResponse = await fetch(url);
-  const latestJson = await latestResponse.json();
-  const results = latestJson.results;
-  const resultsFormatted = formatResults(results);
-  const sortedResults = sortResults(resultsFormatted);
-  const filteredResults = limitAndFilterCityDuplicates(sortedResults, limit);
-  return filteredResults;
+  try {
+    const latestResponse = await fetch(url);
+    const latestJson = await latestResponse.json();
+    const results = latestJson.results;
+    const resultsFormatted = formatResults(results);
+    const sortedResults = sortResults(resultsFormatted);
+    const filteredResults = limitAndFilterCityDuplicates(sortedResults, limit);
+    return filteredResults;
+  } catch (err) {
+    return [];
+  }
 };
