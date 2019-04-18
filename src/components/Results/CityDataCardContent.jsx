@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./CityDataCardContent.module.scss";
 import { TextButton } from "../Common/Buttons/Buttons";
-import cityKeywords from "../../config/CityKeywords";
+import { cityKeywords } from "../../config/CityKeywords";
 
 const isDataCorrect = city => city.dataLoaded && city.data.articleSummary;
 const CityDataContentCorrect = ({ city }) => (
