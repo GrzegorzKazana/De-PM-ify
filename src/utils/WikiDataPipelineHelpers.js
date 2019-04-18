@@ -21,7 +21,7 @@ const isDataAmbigious = city =>
 export const assessCityDataQuiality = city => {
   const isCorrect = isDataCorrect(city) && !isDataAmbigious(city);
   const isAmbigious = isDataCorrect(city) && isDataAmbigious(city);
-  const isInvalid = !isCorrect || !isAmbigious;
+  const isInvalid = !isCorrect && !isAmbigious;
   return {
     ...city,
     isCorrect,
