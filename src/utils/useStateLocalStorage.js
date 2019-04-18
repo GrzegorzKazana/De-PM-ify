@@ -5,7 +5,7 @@ const useStateLocalStorage = (keyName, initialState) => {
 
   //run on mount
   useEffect(() => {
-    const localData = localStorage.getItem(keyName);
+    const localData = localStorage.getItem(keyName) || initialState;
     setState(localData);
   }, []);
 
