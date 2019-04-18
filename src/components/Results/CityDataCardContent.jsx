@@ -5,7 +5,7 @@ import { TextButton } from "../Common/Buttons/Buttons";
 import { cityKeywords } from "../../config/CityKeywords";
 
 const isDataCorrect = city => city.dataLoaded && city.data.articleSummary;
-const CityDataContentCorrect = ({ city }) => (
+const CityDataContentCardCorrect = ({ city }) => (
   <>
     <div className={styles.CityDataCard__ContentMain}>
       {city.dataLoaded && <p>{city.data.articleSummary}</p>}
@@ -26,7 +26,7 @@ const isDataAmbigious = city =>
   !cityKeywords
     .map(keyword => city.data.articleSummary.includes(keyword))
     .some(x => x);
-const CityDataContentAmbigious = ({ city }) => (
+const CityDataContentCardAmbigious = ({ city }) => (
   <>
     <div className={styles.CityDataCard__ContentMainAmbigious}>
       <p>{city.data.articleSummary}</p>
@@ -42,7 +42,7 @@ const CityDataContentAmbigious = ({ city }) => (
 );
 
 const wikiSearchUrl = "https://en.wikipedia.org/w/index.php?search=";
-const CityDataContentFailed = ({ city }) => (
+const CityDataContentCardFailed = ({ city }) => (
   <>
     <div className={styles.CityDataCard__ContentMainFailed}>
       <p>Oops! It seems we could not find data you are looking for...</p>
@@ -56,33 +56,33 @@ const CityDataContentFailed = ({ city }) => (
   </>
 );
 
-const CityDataContent = ({ city }) => (
-  <div className={styles.CityDataCard__Content}>
-    {isDataCorrect(city) ? (
-      isDataAmbigious(city) ? (
-        <CityDataContentAmbigious city={city} />
-      ) : (
-        <CityDataContentCorrect city={city} />
-      )
+const CityDataCardContent = ({ city }) => {
+  const content = isDataCorrect(city) ? (
+    isDataAmbigious(city) ? (
+      <CityDataContentCardAmbigious city={city} />
     ) : (
-      <CityDataContentFailed city={city} />
-    )}
-  </div>
-);
-export default CityDataContent;
+      <CityDataContentCardCorrect city={city} />
+    )
+  ) : (
+    <CityDataContentCardFailed city={city} />
+  );
 
-CityDataContent.propTypes = {
+  return <div className={styles.CityDataCard__Content}>{content}</div>;
+};
+export default CityDataCardContent;
+
+CityDataCardContent.propTypes = {
   ...cityPropTypes
 };
 
-CityDataContentCorrect.propTypes = {
+CityDataContentCardCorrect.propTypes = {
   ...cityPropTypes
 };
 
-CityDataContentAmbigious.propTypes = {
+CityDataContentCardAmbigious.propTypes = {
   ...cityPropTypes
 };
 
-CityDataContentFailed.propTypes = {
+CityDataContentCardFailed.propTypes = {
   ...cityPropTypes
 };

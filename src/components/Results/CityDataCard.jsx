@@ -1,31 +1,13 @@
 import React from "react";
 import styles from "./styles/Results.module.scss";
 import PropTypes from "prop-types";
-import { ReactComponent as ArrowLogo } from "../../assets/arrow_down_icon.svg";
-import CityDataContent from "./CityDataCardContent";
-
-const CityDataSummary = ({ city }) => (
-  <summary className={styles.CityDataCard__Summary}>
-    <ArrowLogo />
-    <div className={styles.CityDataCard__Header}>
-      <span className={styles.CityDataCard__Cityname}>{city.city}</span>
-      <div>
-        <span className={styles.CityDataCard__Parameter}>
-          {city.parameter}:&nbsp;
-        </span>
-        <span className={styles.CityDataCard__Value}>
-          {Math.round(city.value)}
-        </span>
-        <span className={styles.CityDataCard__Unit}>{city.unit}</span>
-      </div>
-    </div>
-  </summary>
-);
+import CityDataCardSummary from "./CityDataCardSummary";
+import CityDataCardContent from "./CityDataCardContent";
 
 const CityDataCard = props => (
   <details className={styles.CityDataCard__Wrapper}>
-    <CityDataSummary {...props} />
-    <CityDataContent {...props} />
+    <CityDataCardSummary {...props} />
+    <CityDataCardContent {...props} />
   </details>
 );
 export default CityDataCard;
@@ -39,10 +21,6 @@ export const cityPropTypes = {
     value: PropTypes.number.isRequired,
     unit: PropTypes.string.isRequired
   }).isRequired
-};
-
-CityDataSummary.propTypes = {
-  ...cityPropTypes
 };
 
 CityDataCard.propTypes = {
