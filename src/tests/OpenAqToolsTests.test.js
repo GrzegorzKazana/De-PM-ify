@@ -2,7 +2,8 @@ import {
   formatResults,
   sortResults,
   limitAndFilterCityDuplicates,
-  wrapCitiesWithIdEmptyData
+  wrapCitiesWithIdEmptyData,
+  formatCityNames
 } from "../utils/OpenAqDataPipeHelpers";
 
 describe("testing openaq data pipes", () => {
@@ -296,5 +297,45 @@ describe("testing openaq data pipes", () => {
       }
     ];
     expect(wrapCitiesWithIdEmptyData(rawResults)).toEqual(expectedResults);
+  });
+
+  it("formats city names", () => {
+    const rawResults = [
+      {
+        location: "Warszawa-Chrościckiego",
+        city: "AIR WarSZawa",
+        country: "PL",
+        parameter: "pm25",
+        value: 10.83,
+        unit: "µg/m³"
+      },
+      {
+        location: "AM8 Gdańsk Wrzeszcz",
+        city: "Gdańsk/Albo",
+        country: "PL",
+        parameter: "pm25",
+        value: 10.6072,
+        unit: "µg/m³"
+      }
+    ];
+    const expectedResults = [
+      {
+        location: "Warszawa-Chrościckiego",
+        city: "Warszawa",
+        country: "PL",
+        parameter: "pm25",
+        value: 10.83,
+        unit: "µg/m³"
+      },
+      {
+        location: "AM8 Gdańsk Wrzeszcz",
+        city: "Gdańsk",
+        country: "PL",
+        parameter: "pm25",
+        value: 10.6072,
+        unit: "µg/m³"
+      }
+    ];
+    expect(formatCityNames(rawResults)).toEqual(expectedResults);
   });
 });
