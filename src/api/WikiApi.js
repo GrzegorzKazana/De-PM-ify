@@ -1,4 +1,5 @@
 import { stringifyRequest } from "./Common";
+import { assessCityDataQuiality } from "../utils/WikiDataPipelineHelpers";
 
 const baseUrl = "https://en.wikipedia.org/w/api.php";
 
@@ -23,11 +24,13 @@ export const fetchCityWikiData = async title => {
     ) {
       return undefined;
     }
-    return {
+    const cityData = {
       articleTitle: firstAtricleTitle,
       articleSummary: firstArticleSummary,
       articleUrl: firstArticleUrl
     };
+    const assessedCityData = assessCityDataQuiality(cityData);
+    return assessedCityData;
   } catch (err) {
     return undefined;
   }
