@@ -40,6 +40,7 @@ const CityDataContentAmbigious = ({ city }) => (
   </>
 );
 
+const wikiSearchUrl = "https://en.wikipedia.org/w/index.php?search=";
 const CityDataContentFailed = ({ city }) => (
   <>
     <div className={styles.CityDataCard__ContentMainFailed}>
@@ -48,7 +49,7 @@ const CityDataContentFailed = ({ city }) => (
     <div className={styles.CityDataCard__ContentFooter}>
       <TextButton
         text="let me handle that"
-        onClick={() => window.open(city.data.articleUrl, "_blank")}
+        onClick={() => window.open(wikiSearchUrl + city.city, "_blank")}
       />
     </div>
   </>
