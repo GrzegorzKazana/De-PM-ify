@@ -42,6 +42,7 @@ const combinedCityDataFetch = async (
   resultLimit,
   parameter
 ) => {
+  dispatch(fetchCities());
   const cities = await fetchCitiesOpenAq(countryCode, resultLimit, parameter);
   const citiesWrapped = cities.map((city, idx) => ({
     ...city,
@@ -50,7 +51,7 @@ const combinedCityDataFetch = async (
     dataFetching: false,
     dataLoaded: false
   }));
-  dispatch(loadedCities(citiesWrapped));
+  dispatch(citiesWrapped ? loadedCities(citiesWrapped) : fetchCitiesFail());
   citiesWrapped.forEach(async city => {
     dispatch(fetchCityData(city.id));
     const cityData = await fetchCityWikiData(city.city);
@@ -60,12 +61,11 @@ const combinedCityDataFetch = async (
   });
 };
 
-export const fetchCountryData = (
+export const fetchAllCityData = (
   countryCode,
   resultLimit,
   parameter
 ) => dispatch => {
-  dispatch(fetchCities());
   combinedCityDataFetch(dispatch, countryCode, resultLimit, parameter).catch(
     err => console.log(err)
   );
