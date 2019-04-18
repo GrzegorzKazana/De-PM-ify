@@ -5,24 +5,14 @@ import PropTypes from "prop-types";
 import Autosuggest from "react-autosuggest";
 import Spinner from "../Common/Spinner/Spinner";
 import useStateLocalStorage from "../../utils/useStateLocalStorage";
-import AvailableCountries from "../../config/AvailableCountries";
 import { ReactComponent as SearchIcon } from "../../assets/search-icon.svg";
-
-const getSuggestions = value => {
-  const inputValue = value.trim().toLowerCase();
-  const inputLength = inputValue.length;
-
-  return inputLength === 0
-    ? AvailableCountries
-    : AvailableCountries.filter(
-        country =>
-          country.name.toLowerCase().slice(0, inputLength) === inputValue
-      );
-};
-
-const getSuggestionValue = country => country.name;
-
-const renderSuggestion = suggestion => <div>{suggestion.name}</div>;
+import {
+  getSuggestions,
+  getSuggestionValue,
+  renderSuggestion,
+  findChoosenCountry,
+  shouldRenderSuggestions
+} from "./SearchInputHelpers";
 
 const SearchInput = ({ loading, onSubmit }) => {
   const [value, setValue] = useStateLocalStorage("input_value", "");
@@ -40,9 +30,7 @@ const SearchInput = ({ loading, onSubmit }) => {
   const onSuggestionsClearRequested = () => setSuggestions([]);
 
   const handleSubmit = e => {
-    const choosenCountry = AvailableCountries.find(
-      country => country.name.toLowerCase() === value.trim().toLowerCase()
-    );
+    const choosenCountry = findChoosenCountry(value);
     choosenCountry ? onSubmit(choosenCountry.code) : setInputValid(false);
     e.preventDefault();
   };
@@ -65,7 +53,7 @@ const SearchInput = ({ loading, onSubmit }) => {
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
         inputProps={inputProps}
-        alwaysRenderSuggestions
+        shouldRenderSuggestions={shouldRenderSuggestions}
         highlightFirstSuggestion
       />
       <button className={styles.SearchInput__Button}>
