@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./CityDataCardContent.module.scss";
+import styles from "./styles/CityDataCardContent.module.scss";
 import { TextButton } from "../Common/Buttons/Buttons";
 import { cityKeywords } from "../../config/CityKeywords";
 

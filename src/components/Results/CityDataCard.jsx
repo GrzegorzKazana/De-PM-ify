@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Results.module.scss";
+import styles from "./styles/Results.module.scss";
 import PropTypes from "prop-types";
 import { ReactComponent as ArrowLogo } from "../../assets/arrow_down_icon.svg";
 import CityDataContent from "./CityDataCardContent";

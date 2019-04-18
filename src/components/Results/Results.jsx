@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styles from "./Results.module.scss";
+import styles from "./styles/Results.module.scss";
 import CityDataCard from "./CityDataCard";
 
 const Results = ({ open, cities, inputRef }) => (
