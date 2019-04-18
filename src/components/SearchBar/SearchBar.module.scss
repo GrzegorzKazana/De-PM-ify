@@ -30,6 +30,8 @@
 }
 
 .SearchBar__Wrapper {
+  position: sticky;
+  top: 0;
   background-color: $secondary-color;
   height: $searchbar-height;
   display: flex;
