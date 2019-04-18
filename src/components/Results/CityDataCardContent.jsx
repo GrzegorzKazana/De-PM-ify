@@ -40,7 +40,7 @@ const CityDataContentCardInvalid = ({ city }) => (
     <div className={styles.CityDataCard__ContentFooter}>
       <TextButton
         text="let me handle that"
-        onClick={() => openLink(city.data.articleUrl)}
+        onClick={() => openLink(wikiSearchUrl + city.city)}
       />
     </div>
   </>
