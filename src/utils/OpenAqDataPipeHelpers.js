@@ -1,3 +1,8 @@
+import {
+  removeOccurencesInString,
+  fixCapitalization
+} from "../utils/StringManipulation";
+
 //formats result array to simpler form
 //discarding irrevelant data
 export const formatResults = results =>
@@ -35,6 +40,12 @@ export const limitAndFilterCityDuplicates = (results, limit) => {
   }
   return filteredResults;
 };
+
+export const formatCityNames = cities =>
+  cities.map(city => ({
+    ...city,
+    city: fixCapitalization(removeOccurencesInString(city.city, ["AIR "]))
+  }));
 
 //adds id, empty data and fetch status to city objects
 export const wrapCitiesWithIdEmptyData = cities =>
