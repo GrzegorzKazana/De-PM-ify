@@ -18,6 +18,8 @@ const CityDataContentCorrect = ({ city }) => (
   </>
 );
 
+//if wiki text contains "refer" or does not contain any of city keywords
+//its marked as ambigious
 const isDataAmbigious = city =>
   city.data.articleSummary.includes("refer") ||
   !cityKeywords
