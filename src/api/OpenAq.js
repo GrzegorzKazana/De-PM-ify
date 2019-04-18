@@ -1,4 +1,4 @@
-import { stringifyRequest } from "./Common";
+import { stringifyUrlRequest } from "../utils/StringifyUrlRequest";
 import {
   formatResults,
   sortResults,
@@ -19,7 +19,7 @@ export const fetchCitiesOpenAq = async (
     parameter: parameter,
     limit: 10000
   };
-  const url = stringifyRequest(baseUrl + latestEndpoint, params);
+  const url = stringifyUrlRequest(baseUrl + latestEndpoint, params);
   try {
     const latestResponse = await fetch(url);
     const latestJson = await latestResponse.json();

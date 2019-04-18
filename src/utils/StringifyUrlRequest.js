@@ -1,5 +1,5 @@
 const esc = encodeURIComponent;
-export const stringifyRequest = (url, params) =>
+export const stringifyUrlRequest = (url, params) =>
   `${url}?${Object.keys(params)
     .map(
       k =>
