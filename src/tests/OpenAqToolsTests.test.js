@@ -1,8 +1,9 @@
 import {
   formatResults,
   sortResults,
-  limitAndFilterCityDuplicates
-} from "../api/OpenAq";
+  limitAndFilterCityDuplicates,
+  wrapCitiesWithIdEmptyData
+} from "../utils/OpenAqDataPipeHelpers";
 
 describe("testing openaq data pipes", () => {
   it("formats results", () => {
@@ -227,5 +228,73 @@ describe("testing openaq data pipes", () => {
     expect(limitAndFilterCityDuplicates(rawResults, limit)).toEqual(
       expectedResults
     );
+  });
+
+  it("wraps city data with id and data fetch status", () => {
+    const rawResults = [
+      {
+        location: "Warszawa-Chrościckiego",
+        city: "Warszawa",
+        country: "PL",
+        parameter: "pm25",
+        value: 10.83,
+        unit: "µg/m³"
+      },
+      {
+        location: "AM8 Gdańsk Wrzeszcz",
+        city: "Gdańsk",
+        country: "PL",
+        parameter: "pm25",
+        value: 10.6072,
+        unit: "µg/m³"
+      },
+      {
+        location: "WIOŚ Olsztyn ul. Puszkina",
+        city: "Olsztyn",
+        country: "PL",
+        parameter: "pm25",
+        value: 9.26139,
+        unit: "µg/m³"
+      }
+    ];
+    const expectedResults = [
+      {
+        location: "Warszawa-Chrościckiego",
+        city: "Warszawa",
+        country: "PL",
+        parameter: "pm25",
+        value: 10.83,
+        unit: "µg/m³",
+        data: {},
+        id: 0,
+        dataFetching: false,
+        dataLoaded: false
+      },
+      {
+        location: "AM8 Gdańsk Wrzeszcz",
+        city: "Gdańsk",
+        country: "PL",
+        parameter: "pm25",
+        value: 10.6072,
+        unit: "µg/m³",
+        data: {},
+        id: 1,
+        dataFetching: false,
+        dataLoaded: false
+      },
+      {
+        location: "WIOŚ Olsztyn ul. Puszkina",
+        city: "Olsztyn",
+        country: "PL",
+        parameter: "pm25",
+        value: 9.26139,
+        unit: "µg/m³",
+        data: {},
+        id: 2,
+        dataFetching: false,
+        dataLoaded: false
+      }
+    ];
+    expect(wrapCitiesWithIdEmptyData(rawResults)).toEqual(expectedResults);
   });
 });
