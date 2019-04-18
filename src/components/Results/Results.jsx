@@ -1,21 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styles from "./Results.module.scss";
+import styles from "./styles/Results.module.scss";
 import CityDataCard from "./CityDataCard";
 
-const Results = ({ open, cities, inputRef }) => (
-  <main className={styles.Resuls__Wrapper} ref={inputRef}>
-    <section
-      className={`${styles.Results__Body} ${
-        open ? styles.Results__BodyOpen : styles.Results__BodyClosed
-      }`}
-    >
-      {cities.map(city => (
-        <CityDataCard key={city.city} city={city} />
-      ))}
-    </section>
-  </main>
-);
+const Results = ({ open, cities, inputRef }) => {
+  const bodyClassName = `${styles.Results__Body} ${
+    open ? styles.Results__BodyOpen : styles.Results__BodyClosed
+  }`;
+
+  return (
+    <main className={styles.Resuls__Wrapper} ref={inputRef}>
+      <section className={bodyClassName}>
+        {cities.map(city => (
+          <CityDataCard key={city.city} city={city} />
+        ))}
+      </section>
+    </main>
+  );
+};
 export default Results;
 
 Results.propTypes = {

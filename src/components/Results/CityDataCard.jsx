@@ -1,36 +1,18 @@
 import React from "react";
-import styles from "./Results.module.scss";
+import styles from "./styles/Results.module.scss";
 import PropTypes from "prop-types";
-import { ReactComponent as ArrowLogo } from "../../assets/arrow_down_icon.svg";
-import CityDataContent from "./CityDataCardContent";
+import CityDataCardSummary from "./CityDataCardSummary";
+import CityDataCardContent from "./CityDataCardContent";
 
-const CityDataSummary = ({ city }) => (
-  <summary className={styles.CityDataCard__Summary}>
-    <ArrowLogo />
-    <div className={styles.CityDataCard__Header}>
-      <span className={styles.CityDataCard__Cityname}>{city.city}</span>
-      <div>
-        <span className={styles.CityDataCard__Parameter}>
-          {city.parameter}:&nbsp;
-        </span>
-        <span className={styles.CityDataCard__Value}>
-          {Math.round(city.value)}
-        </span>
-        <span className={styles.CityDataCard__Unit}>{city.unit}</span>
-      </div>
-    </div>
-  </summary>
-);
-
-const CityDataCard = ({ city }) => (
+const CityDataCard = props => (
   <details className={styles.CityDataCard__Wrapper}>
-    <CityDataSummary city={city} />
-    <CityDataContent city={city} />
+    <CityDataCardSummary {...props} />
+    <CityDataCardContent {...props} />
   </details>
 );
 export default CityDataCard;
 
-const cityPropTypes = {
+export const cityPropTypes = {
   city: PropTypes.shape({
     country: PropTypes.string.isRequired,
     city: PropTypes.string.isRequired,
@@ -39,14 +21,6 @@ const cityPropTypes = {
     value: PropTypes.number.isRequired,
     unit: PropTypes.string.isRequired
   }).isRequired
-};
-
-CityDataSummary.propTypes = {
-  ...cityPropTypes
-};
-
-CityDataContent.propTypes = {
-  ...cityPropTypes
 };
 
 CityDataCard.propTypes = {
