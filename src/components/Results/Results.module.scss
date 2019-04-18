@@ -76,4 +76,7 @@
 }
 
 .CityDataCard__Content {
+  min-height: $city-details-min-height;
+  padding: 4px 8px;
+  text-align: justify;
 }

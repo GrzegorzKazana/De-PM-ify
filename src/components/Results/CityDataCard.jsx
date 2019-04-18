@@ -23,7 +23,7 @@ const CityDataSummary = ({ city }) => (
 
 const CityDataContent = ({ city }) => (
   <div className={styles.CityDataCard__Content}>
-    Informacje szczegółowe na dany temat.
+    {city.dataLoaded && <p>{city.data.articleSummary}</p>}
   </div>
 );
 
