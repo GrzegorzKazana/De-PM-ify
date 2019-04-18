@@ -52,11 +52,15 @@ export const fetchCitiesOpenAq = async (
     limit: 10000
   };
   const url = stringifyRequest(baseUrl + latestEndpoint, params);
-  const latestResponse = await fetch(url);
-  const latestJson = await latestResponse.json();
-  const results = latestJson.results;
-  const resultsFormatted = formatResults(results);
-  const sortedResults = sortResults(resultsFormatted);
-  const filteredResults = limitAndFilterCityDuplicates(sortedResults, limit);
-  return filteredResults;
+  try {
+    const latestResponse = await fetch(url);
+    const latestJson = await latestResponse.json();
+    const results = latestJson.results;
+    const resultsFormatted = formatResults(results);
+    const sortedResults = sortResults(resultsFormatted);
+    const filteredResults = limitAndFilterCityDuplicates(sortedResults, limit);
+    return filteredResults;
+  } catch (err) {
+    return [];
+  }
 };
