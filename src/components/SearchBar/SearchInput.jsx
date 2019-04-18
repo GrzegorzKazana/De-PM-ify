@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "./ReactAutosuggestStyles.scss";
-import styles from "./SearchBar.module.scss";
+import "./styles/ReactAutosuggestStyles.scss";
+import styles from "./styles/SearchBar.module.scss";
 import PropTypes from "prop-types";
 import Autosuggest from "react-autosuggest";
 import Spinner from "../Common/Spinner/Spinner";
