@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./styles/CityDataCardContent.module.scss";
+import Spinner from "../Common/Spinner/Spinner";
+
 import { cityPropTypes } from "./CityDataCard";
 import { TextButton } from "../Common/Buttons/Buttons";
 
@@ -33,7 +35,7 @@ const CityDataContentCardAmbigious = ({ city }) => (
 );
 
 const wikiSearchUrl = "https://en.wikipedia.org/w/index.php?search=";
-const CityDataContentCardFailed = ({ city }) => (
+const CityDataContentCardInvalid = ({ city }) => (
   <>
     <div className={styles.CityDataCard__ContentMainFailed}>
       <p>Oops! It seems we could not find data you are looking for...</p>
@@ -47,14 +49,24 @@ const CityDataContentCardFailed = ({ city }) => (
   </>
 );
 
+const CityDataContentCardLoading = () => (
+  <div className={styles.CityDataCard__ContentMainLoading}>
+    <Spinner />
+  </div>
+);
+
 const CityDataCardContent = ({ city }) => {
   return (
     <div className={styles.CityDataCard__Content}>
-      {city.data.isCorrect && <CityDataContentCardCorrect city={city} />}
-      {city.data.isAmbigious && <CityDataContentCardAmbigious city={city} />}
-      {(city.data.isInvalid === undefined || city.data.isInvalid) && (
-        <CityDataContentCardFailed city={city} />
-      )}
+      {city.dataFetching ? (
+        <CityDataContentCardLoading />
+      ) : city.data.isInvalid === undefined || city.data.isInvalid ? (
+        <CityDataContentCardInvalid city={city} />
+      ) : city.data.isCorrect ? (
+        <CityDataContentCardCorrect city={city} />
+      ) : city.data.isAmbigious ? (
+        <CityDataContentCardAmbigious city={city} />
+      ) : null}
     </div>
   );
 };
@@ -72,6 +84,6 @@ CityDataContentCardAmbigious.propTypes = {
   ...cityPropTypes
 };
 
-CityDataContentCardFailed.propTypes = {
+CityDataContentCardInvalid.propTypes = {
   ...cityPropTypes
 };
