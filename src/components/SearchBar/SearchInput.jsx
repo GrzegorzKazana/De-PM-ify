@@ -4,6 +4,7 @@ import "./ReactAutosuggestStyles.scss";
 import styles from "./SearchBar.module.scss";
 import { ReactComponent as SearchIcon } from "../../assets/search-icon.svg";
 import Spinner from "../Common/Spinner/Spinner";
+import useStateLocalStorage from "../../utils/useStateLocalStorage";
 import Autosuggest from "react-autosuggest";
 import AvailableCountries from "../../config/AvailableCountries";
 
@@ -25,7 +26,7 @@ const renderSuggestion = suggestion => <div>{suggestion.name}</div>;
 
 const SearchInput = ({ loading, onSubmit }) => {
   const [suggestions, setSuggestions] = useState([]);
-  const [value, setValue] = useState("");
+  const [value, setValue] = useStateLocalStorage("input_value", "");
   const [inputValid, setInputValid] = useState(true);
 
   const onInputChange = (e, { newValue }) => {
