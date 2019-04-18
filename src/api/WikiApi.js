@@ -29,6 +29,7 @@ export const fetchCityWikiData = async title => {
       articleSummary: firstArticleSummary,
       articleUrl: firstArticleUrl
     };
+
     const assessedCityData = assessCityDataQuiality(cityData);
     return assessedCityData;
   } catch (err) {
