@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import "./ReactAutosuggestStyles.scss";
 import styles from "./SearchBar.module.scss";
-import { ReactComponent as SearchIcon } from "../../assets/search-icon.svg";
+import PropTypes from "prop-types";
+import Autosuggest from "react-autosuggest";
 import Spinner from "../Common/Spinner/Spinner";
 import useStateLocalStorage from "../../utils/useStateLocalStorage";
-import Autosuggest from "react-autosuggest";
 import AvailableCountries from "../../config/AvailableCountries";
+import { ReactComponent as SearchIcon } from "../../assets/search-icon.svg";
 
 const getSuggestions = value => {
   const inputValue = value.trim().toLowerCase();
@@ -25,26 +25,25 @@ const getSuggestionValue = country => country.name;
 const renderSuggestion = suggestion => <div>{suggestion.name}</div>;
 
 const SearchInput = ({ loading, onSubmit }) => {
-  const [suggestions, setSuggestions] = useState([]);
   const [value, setValue] = useStateLocalStorage("input_value", "");
+  const [suggestions, setSuggestions] = useState([]);
   const [inputValid, setInputValid] = useState(true);
 
   const onInputChange = (e, { newValue }) => {
     setInputValid(true);
     setValue(newValue);
   };
+
   const onSuggestionsFetchRequested = ({ value }) =>
     setSuggestions(getSuggestions(value));
+
   const onSuggestionsClearRequested = () => setSuggestions([]);
+
   const handleSubmit = e => {
     const choosenCountry = AvailableCountries.find(
       country => country.name.toLowerCase() === value.trim().toLowerCase()
     );
-    if (choosenCountry) {
-      onSubmit(choosenCountry.code);
-    } else {
-      setInputValid(false);
-    }
+    choosenCountry ? onSubmit(choosenCountry.code) : setInputValid(false);
     e.preventDefault();
   };
 
