@@ -13,7 +13,7 @@ const getSuggestions = value => {
   const inputLength = inputValue.length;
 
   return inputLength === 0
-    ? []
+    ? AvailableCountries
     : AvailableCountries.filter(
         country =>
           country.name.toLowerCase().slice(0, inputLength) === inputValue
@@ -66,6 +66,8 @@ const SearchInput = ({ loading, onSubmit }) => {
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
         inputProps={inputProps}
+        alwaysRenderSuggestions
+        highlightFirstSuggestion
       />
       <button className={styles.SearchInput__Button}>
         {loading ? <Spinner /> : <SearchIcon />}
