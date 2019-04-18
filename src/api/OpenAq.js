@@ -41,7 +41,7 @@ export const limitAndFilterCityDuplicates = (results, limit) => {
   return filteredResults;
 };
 
-export const collectCities = async (
+export const fetchCitiesOpenAq = async (
   countryCode,
   limit = 10,
   parameter = "pm25"

@@ -1,4 +1,4 @@
-import { collectCities } from "../api/OpenAq";
+import { fetchCitiesOpenAq } from "../api/OpenAq";
 import { fetchCityWikiData } from "../api/WikiApi";
 
 export const FETCHING_CITIES = "FETCHING_CITIES";
@@ -42,7 +42,7 @@ const combinedCityDataFetch = async (
   resultLimit,
   parameter
 ) => {
-  const cities = await collectCities(countryCode, resultLimit, parameter);
+  const cities = await fetchCitiesOpenAq(countryCode, resultLimit, parameter);
   const citiesWrapped = cities.map((city, idx) => ({
     ...city,
     id: idx,
@@ -54,7 +54,9 @@ const combinedCityDataFetch = async (
   citiesWrapped.forEach(async city => {
     dispatch(fetchCityData(city.id));
     const cityData = await fetchCityWikiData(city.city);
-    dispatch(loadedCityData(city.id, cityData));
+    dispatch(
+      cityData ? loadedCityData(city.id, cityData) : fetchCityDataFail(city.id)
+    );
   });
 };
 
