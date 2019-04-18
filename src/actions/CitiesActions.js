@@ -66,7 +66,29 @@ export const fetchAllCityData = (
   resultLimit,
   parameter
 ) => dispatch => {
-  combinedCityDataFetch(dispatch, countryCode, resultLimit, parameter).catch(
-    err => console.log(err)
-  );
+  // combinedCityDataFetch(dispatch, countryCode, resultLimit, parameter).catch(
+  //   err => console.log(err)
+  // );
+
+  dispatch(fetchCities());
+  fetchCitiesOpenAq(countryCode, resultLimit, parameter).then(cities => {
+    const citiesWrapped = cities.map((city, idx) => ({
+      ...city,
+      id: idx,
+      data: {},
+      dataFetching: false,
+      dataLoaded: false
+    }));
+    dispatch(citiesWrapped ? loadedCities(citiesWrapped) : fetchCitiesFail());
+    citiesWrapped.forEach(city => {
+      dispatch(fetchCityData(city.id));
+      fetchCityWikiData(city.city).then(cityData => {
+        dispatch(
+          cityData
+            ? loadedCityData(city.id, cityData)
+            : fetchCityDataFail(city.id)
+        );
+      });
+    });
+  });
 };
