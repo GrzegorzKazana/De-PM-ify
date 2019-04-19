@@ -1,11 +1,15 @@
 @import "../../../variables.scss";
 
+$search-bar-width: 400px;
+$search-bar-width-phone: 200px;
+$suggestion-padding-width: 10px;
+
 .react-autosuggest__container {
   position: relative;
 }
 
 .react-autosuggest__input {
-  width: 240px;
+  width: $search-bar-width;
   height: 30px;
   padding: 5px 10px;
   font-family: Helvetica, sans-serif;
@@ -16,6 +20,10 @@
 
   &:focus {
     background-color: $primary-color-light;
+  }
+
+  @include phone {
+    width: $search-bar-width-phone;
   }
 }
 
@@ -40,13 +48,17 @@
   display: block;
   position: absolute;
   top: 41px;
-  width: 260px;
+  width: calc(#{$search-bar-width} + 2 * #{$suggestion-padding-width});
   border: 1px solid $primary-color-dark;
   background-color: #fff;
   font-family: Helvetica, sans-serif;
   font-weight: 300;
   font-size: 16px;
   border-radius: 0px 0px 4px 4px;
+
+  @include phone {
+    width: calc(#{$search-bar-width-phone} + 2 * #{$suggestion-padding-width});
+  }
 }
 
 .react-autosuggest__suggestions-list {
@@ -58,7 +70,7 @@
 .react-autosuggest__suggestion {
   color: #000;
   cursor: pointer;
-  padding: 10px 10px;
+  padding: 10px $suggestion-padding-width;
 }
 
 .react-autosuggest__suggestion--highlighted {

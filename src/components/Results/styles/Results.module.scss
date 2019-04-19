@@ -7,7 +7,7 @@
 
 .Results__Body {
   max-width: 768px;
-  margin: 64px auto;
+  margin: 64px auto 16px auto;
   overflow: hidden;
   transition: opacity 0.2s ease;
 
@@ -30,6 +30,10 @@
   &[open] svg {
     transform: rotate(-180deg);
   }
+
+  @include phone {
+    margin: 4px;
+  }
 }
 
 .CityDataCard__Summary {
@@ -37,12 +41,13 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 4px 8px;
+  padding: 8px 8px;
   outline: 0px;
 
   svg {
     width: 2rem;
     height: 2rem;
+    flex-shrink: 0;
     transition: transform $animation-duration $animation-easing;
   }
 
@@ -58,9 +63,16 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  overflow: auto;
 
   & .CityDataCard__Cityname {
     font-size: 2rem;
+    text-align: left;
+    padding: 0px 8px 0px 0px;
+
+    @include phone {
+      font-size: 1.5rem;
+    }
   }
 
   & .CityDataCard__Parameter {
