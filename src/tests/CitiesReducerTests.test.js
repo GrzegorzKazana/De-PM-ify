@@ -1,11 +1,11 @@
 import CitiesReducer, { defaultState } from "../reducers/CitiesReducer";
 import {
   fetchCities,
-  loadedCities,
-  fetchCitiesFail,
+  loadCities,
+  fetchCitiesError,
   fetchCityData,
-  loadedCityData,
-  fetchCityDataFail
+  loadCityData,
+  fetchCityDataError
 } from "../actions/CitiesActions";
 
 describe("testing city reducer", () => {
@@ -41,7 +41,7 @@ describe("testing city reducer", () => {
       citiesFetching: false,
       citiesLoaded: true
     };
-    const action = loadedCities(cities);
+    const action = loadCities(cities);
     expect(CitiesReducer(initialState, action)).toEqual(expectedState);
   });
 
@@ -52,7 +52,7 @@ describe("testing city reducer", () => {
       citiesFetching: false,
       citiesLoaded: false
     };
-    const action = fetchCitiesFail();
+    const action = fetchCitiesError();
     expect(CitiesReducer(initialState, action)).toEqual(expectedState);
   });
 
@@ -103,7 +103,7 @@ describe("testing city reducer", () => {
       citiesFetching: false,
       citiesLoaded: true
     };
-    const action = loadedCityData(cityId, cityData);
+    const action = loadCityData(cityId, cityData);
     expect(CitiesReducer(initialState, action)).toEqual(expectedState);
   });
 
@@ -126,7 +126,7 @@ describe("testing city reducer", () => {
       citiesFetching: false,
       citiesLoaded: true
     };
-    const action = fetchCityDataFail(cityId);
+    const action = fetchCityDataError(cityId);
     expect(CitiesReducer(initialState, action)).toEqual(expectedState);
   });
 });
