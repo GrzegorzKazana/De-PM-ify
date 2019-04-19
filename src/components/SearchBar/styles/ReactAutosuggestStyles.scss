@@ -19,9 +19,8 @@ $suggestion-padding-width: 10px;
   border: 1px solid $primary-color-dark;
   border-radius: 4px 0px 0px 4px;
 
-  &:focus {
-    // background-color: $primary-color-light;
-    box-shadow: 0 0 0 1 #ff0;
+  &:hover {
+    background-color: $primary-color-light;
   }
 
   @include phone {
