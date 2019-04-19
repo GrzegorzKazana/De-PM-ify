@@ -12,7 +12,7 @@ const Results = ({ open, cities, inputRef }) => {
     <main className={styles.Resuls__Wrapper} ref={inputRef}>
       <section className={bodyClassName}>
         {cities.map(city => (
-          <CityDataCard key={city.city} city={city} />
+          <CityDataCard key={city.id} city={city} />
         ))}
       </section>
     </main>
