@@ -12,6 +12,7 @@ $suggestion-padding-width: 10px;
   width: $search-bar-width;
   height: 30px;
   padding: 5px 10px;
+  outline: 0;
   font-family: Helvetica, sans-serif;
   font-weight: 300;
   font-size: 16px;
@@ -19,7 +20,8 @@ $suggestion-padding-width: 10px;
   border-radius: 4px 0px 0px 4px;
 
   &:focus {
-    background-color: $primary-color-light;
+    // background-color: $primary-color-light;
+    box-shadow: 0 0 0 1 #ff0;
   }
 
   @include phone {

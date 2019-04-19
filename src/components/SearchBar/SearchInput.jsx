@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./styles/ReactAutosuggestStyles.scss";
+import "./styles/ReactSelectStyles.scss";
 import styles from "./styles/SearchBar.module.scss";
 import PropTypes from "prop-types";
 import Autosuggest from "react-autosuggest";
@@ -13,6 +14,13 @@ import {
   findChoosenCountry,
   shouldRenderSuggestions
 } from "./SearchInputHelpers";
+import Select from "react-select";
+
+const options = [
+  { value: "asd", label: "asd" },
+  { value: "sdf", label: "sdf" },
+  { value: "dfg", label: "dfg" }
+];
 
 const SearchInput = ({ loading, onSubmit }) => {
   const [value, setValue] = useStateLocalStorage("input_value", "");
@@ -55,6 +63,14 @@ const SearchInput = ({ loading, onSubmit }) => {
         inputProps={inputProps}
         shouldRenderSuggestions={shouldRenderSuggestions}
         highlightFirstSuggestion
+      />
+      <Select
+        id="asd"
+        value={options[0]}
+        options={options}
+        onChange={e => console.log(e)}
+        className="react-select-container"
+        classNamePrefix="react-select"
       />
       <button className={styles.SearchInput__Button}>
         {loading ? <Spinner /> : <SearchIcon />}

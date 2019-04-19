@@ -30,6 +30,13 @@
   }
 }
 
+.SearchInput__Option {
+  color: #000;
+  cursor: pointer;
+  padding: 10px 10px;
+  // color: red;
+}
+
 .SearchBar__Wrapper {
   position: sticky;
   top: 0;
@@ -39,5 +46,5 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  color: red;
+  // color: red;
 }
