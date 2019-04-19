@@ -4,6 +4,7 @@ import {
   takeUntilChar
 } from "../utils/StringManipulation";
 import { redundantCityPrefixes } from "../config/RedundantCityPrefixes";
+import uuid from "uuid";
 
 //formats result array to simpler form
 //discarding irrevelant data
@@ -57,9 +58,9 @@ export const formatCityNames = cities =>
 
 //adds id, empty data and fetch status to city objects
 export const wrapCitiesWithIdEmptyData = cities =>
-  cities.map((city, idx) => ({
+  cities.map(city => ({
     ...city,
-    id: idx,
+    id: uuid.v4(),
     data: {},
     dataFetching: false,
     dataLoaded: false
