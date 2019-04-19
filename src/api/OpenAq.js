@@ -7,28 +7,31 @@ import {
   wrapCitiesWithIdEmptyData
 } from "../utils/OpenAqDataPipeHelpers";
 import { openAqLatestApi } from "../config/Urls";
+import { composeF } from "../utils/ComposeFunction";
 
 export const fetchCitiesOpenAq = async (
   countryCode,
-  limit = 10,
+  limitTopResults = 10,
   parameter = "pm25"
 ) => {
   const params = {
     country: countryCode,
-    parameter: parameter,
-    limit: 10000
+    limit: 10000,
+    parameter
   };
   const url = stringifyUrlRequest(openAqLatestApi, params);
   try {
     const latestResponse = await fetch(url);
     const latestJson = await latestResponse.json();
-    const results = latestJson.results;
-    const citiesFormatted = formatResults(results);
-    const citiesNameFormatted = formatCityNames(citiesFormatted);
-    const sortedCities = sortResults(citiesNameFormatted);
-    const filteredCities = limitAndFilterCityDuplicates(sortedCities, limit);
-    const wrappedCities = wrapCitiesWithIdEmptyData(filteredCities);
-    return wrappedCities;
+    const processedCities = composeF(
+      x => x.results,
+      formatResults,
+      formatCityNames,
+      sortResults,
+      x => limitAndFilterCityDuplicates(x, limitTopResults),
+      wrapCitiesWithIdEmptyData
+    )(latestJson);
+    return processedCities;
   } catch (err) {
     return [];
   }
