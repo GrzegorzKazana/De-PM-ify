@@ -6,10 +6,10 @@
 
 ## Purpose
 
-Create website allowing users to view cities with worst air quality from biggest european countries.
+Create website allowing users to view cities with worst air quality (sorted by selected parameter) from biggest european countries.
 
-Used APIs:
-[**OpenAQ**](https://openaq.org/) - air quality data
+Used APIs:\
+[**OpenAQ**](https://openaq.org/) - air quality data\
 [**MediaWiki**](https://www.mediawiki.org/wiki/API:Main_page/en) - city data
 
 ---
