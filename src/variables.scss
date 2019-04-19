@@ -13,3 +13,10 @@ $city-details-min-height: 150px;
 /*animations*/
 $animation-duration: 0.2s;
 $animation-easing: ease;
+
+/*mixins*/
+@mixin phone {
+  @media only screen and (max-width: 480px) {
+    @content;
+  }
+}
