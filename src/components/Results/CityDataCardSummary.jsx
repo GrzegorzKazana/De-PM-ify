@@ -3,8 +3,11 @@ import styles from "./styles/Results.module.scss";
 import { ReactComponent as ArrowLogo } from "../../assets/arrow_down_icon.svg";
 import { cityPropTypes } from "./CityDataCard";
 
-const CityDataSummary = ({ city }) => (
-  <summary className={styles.CityDataCard__Summary}>
+const CityDataSummary = ({ city, requestCityData }) => (
+  <summary
+    className={styles.CityDataCard__Summary}
+    onClick={() => requestCityData(city)}
+  >
     <ArrowLogo />
     <div className={styles.CityDataCard__Header}>
       <span className={styles.CityDataCard__Cityname}>{city.city}</span>
