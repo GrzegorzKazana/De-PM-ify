@@ -13,7 +13,7 @@ const Results = ({ open, cities, inputRef, requestCityData }) => {
       <section className={bodyClassName}>
         {cities.map(city => (
           <CityDataCard
-            key={city.city}
+            key={city.id}
             city={city}
             requestCityData={requestCityData}
           />
