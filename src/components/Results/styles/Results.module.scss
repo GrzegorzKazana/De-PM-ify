@@ -26,6 +26,10 @@
   margin: 8px;
   border-radius: 8px;
   box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.25);
+
+  &[open] svg {
+    transform: rotate(-180deg);
+  }
 }
 
 .CityDataCard__Summary {
@@ -40,10 +44,6 @@
     width: 2rem;
     height: 2rem;
     transition: transform $animation-duration $animation-easing;
-  }
-
-  &[open] svg {
-    transform: rotate(180deg);
   }
 
   &::-webkit-details-marker {
