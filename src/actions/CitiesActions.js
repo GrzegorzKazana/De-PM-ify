@@ -36,7 +36,7 @@ export const fetchCityDataError = cityId => ({
   cityId
 });
 
-export const fetchAllCityData = (
+export const fetchCityList = (
   countryCode,
   resultLimit,
   parameter
@@ -45,24 +45,23 @@ export const fetchAllCityData = (
   fetchCitiesOpenAq(countryCode, resultLimit, parameter)
     .then(cities => {
       dispatch(cities ? loadCities(cities) : fetchCitiesError());
-      cities.forEach(city => {
-        dispatch(fetchCityData(city.id));
-        fetchCityWikiData(city.city)
-          .then(cityData => {
-            dispatch(
-              cityData
-                ? loadCityData(city.id, cityData)
-                : fetchCityDataError(city.id)
-            );
-          })
-          .catch(err => {
-            fetchCityDataError(city.id);
-            console.error("failed to fetch city data", err);
-          });
-      });
     })
     .catch(err => {
       fetchCitiesError();
       console.error("failed to fetch cities", err);
+    });
+};
+
+export const fetchCityWikiData = city => {
+  dispatch(fetchCityData(city.id));
+  fetchCityWikiData(city.city)
+    .then(cityData => {
+      dispatch(
+        cityData ? loadCityData(city.id, cityData) : fetchCityDataError(city.id)
+      );
+    })
+    .catch(err => {
+      fetchCityDataError(city.id);
+      console.error("failed to fetch city data", err);
     });
 };
