@@ -24,7 +24,7 @@ const SearchInput = ({ loading, onSubmit }) => {
   const [value, setValue] = useStateLocalStorage("input_value", "");
   const [valueSelect, setValueSelect] = useStateLocalStorageObject(
     "select_value",
-    null
+    AvailableParameters[0]
   );
   const [suggestions, setSuggestions] = useState([]);
   const [inputValid, setInputValid] = useState(true);
