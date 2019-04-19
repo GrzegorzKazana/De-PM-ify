@@ -2,7 +2,7 @@
 
 div.react-select-container {
   height: 42px;
-  width: 100px;
+  width: 130px;
   //   padding: 5px 10px;
   outline: 0;
   font-family: Helvetica, sans-serif;
@@ -25,7 +25,7 @@ div.react-select-container {
 
 div.react-select__control {
   height: 42px;
-  width: 100px;
+  width: 130px;
   outline: 0;
   border-radius: 0px;
   border-width: 0px;
@@ -34,12 +34,13 @@ div.react-select__control {
   box-shadow: none;
 
   &:hover {
+    background-color: $primary-color-light;
     border-color: $primary-color-dark;
   }
 }
 
 div.react-select__menu {
-  width: 100px;
+  width: 130px;
   border-radius: 0px;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
@@ -50,7 +51,7 @@ div.react-select__menu {
 
 div.react-select__menu-list {
   padding: 0px;
-  width: 100px;
+  width: 130px;
   border-radius: 4px;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;

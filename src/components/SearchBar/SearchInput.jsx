@@ -5,7 +5,10 @@ import styles from "./styles/SearchBar.module.scss";
 import PropTypes from "prop-types";
 import Autosuggest from "react-autosuggest";
 import Spinner from "../Common/Spinner/Spinner";
-import useStateLocalStorage from "../../utils/useStateLocalStorage";
+import {
+  useStateLocalStorage,
+  useStateLocalStorageObject
+} from "../../utils/useStateLocalStorage";
 import { ReactComponent as SearchIcon } from "../../assets/search-icon.svg";
 import {
   getSuggestions,
@@ -24,6 +27,10 @@ const options = [
 
 const SearchInput = ({ loading, onSubmit }) => {
   const [value, setValue] = useStateLocalStorage("input_value", "");
+  const [valueSelect, setValueSelect] = useStateLocalStorageObject(
+    "select_value",
+    null
+  );
   const [suggestions, setSuggestions] = useState([]);
   const [inputValid, setInputValid] = useState(true);
 
@@ -65,10 +72,10 @@ const SearchInput = ({ loading, onSubmit }) => {
         highlightFirstSuggestion
       />
       <Select
-        id="asd"
-        value={options[0]}
+        value={valueSelect}
         options={options}
-        onChange={e => console.log(e)}
+        onChange={setValueSelect}
+        placeholder="Parameter"
         className="react-select-container"
         classNamePrefix="react-select"
       />
