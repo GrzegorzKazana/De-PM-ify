@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styles from "./styles/Results.module.scss";
 import { ReactComponent as ArrowLogo } from "../../assets/arrow_down_icon.svg";
 import { cityPropTypes } from "./CityDataCard";
@@ -32,5 +33,6 @@ const CityDataSummary = ({ city, requestCityData }) => {
 export default CityDataSummary;
 
 CityDataSummary.propTypes = {
-  ...cityPropTypes
+  ...cityPropTypes,
+  requestCityData: PropTypes.func.isRequired
 };

@@ -27,5 +27,6 @@ export default Results;
 Results.propTypes = {
   open: PropTypes.bool.isRequired,
   cities: PropTypes.array,
-  inputRef: PropTypes.object
+  inputRef: PropTypes.object,
+  requestCityData: PropTypes.func.isRequired
 };
