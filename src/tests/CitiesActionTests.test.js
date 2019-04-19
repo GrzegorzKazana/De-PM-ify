@@ -1,22 +1,22 @@
 import {
-  FETCHING_CITIES,
-  LOADED_CITIES,
-  FETCHING_CITIES_FAIL,
-  FETCHING_CITY_DATA,
-  LOADED_CITY_DATA,
-  FETCHING_CITY_DATA_FAIL,
+  FETCH_CITIES,
+  LOAD_CITIES,
+  FETCH_CITIES_ERROR,
+  FETCH_CITY_DATA,
+  LOAD_CITY_DATA,
+  FETCH_CITY_DATA_ERROR,
   fetchCities,
-  loadedCities,
-  fetchCitiesFail,
+  loadCities,
+  fetchCitiesError,
   fetchCityData,
-  loadedCityData,
-  fetchCityDataFail
+  loadCityData,
+  fetchCityDataError
 } from "../actions/CitiesActions";
 
 describe("testing city actions", () => {
   it("creates fetching cities action", () => {
     const expectedAction = {
-      type: FETCHING_CITIES
+      type: FETCH_CITIES
     };
     expect(fetchCities()).toEqual(expectedAction);
   });
@@ -29,23 +29,23 @@ describe("testing city actions", () => {
       { name: "Katowice" }
     ];
     const expectedAction = {
-      type: LOADED_CITIES,
+      type: LOAD_CITIES,
       cities
     };
-    expect(loadedCities(cities)).toEqual(expectedAction);
+    expect(loadCities(cities)).toEqual(expectedAction);
   });
 
   it("creates fetching cities fail action", () => {
     const expectedAction = {
-      type: FETCHING_CITIES_FAIL
+      type: FETCH_CITIES_ERROR
     };
-    expect(fetchCitiesFail()).toEqual(expectedAction);
+    expect(fetchCitiesError()).toEqual(expectedAction);
   });
 
   it("creates fetching city data action", () => {
     const cityId = 3;
     const expectedAction = {
-      type: FETCHING_CITY_DATA,
+      type: FETCH_CITY_DATA,
       cityId
     };
     expect(fetchCityData(cityId)).toEqual(expectedAction);
@@ -57,19 +57,19 @@ describe("testing city actions", () => {
       population: 1000
     };
     const expectedAction = {
-      type: LOADED_CITY_DATA,
+      type: LOAD_CITY_DATA,
       cityId,
       cityData
     };
-    expect(loadedCityData(cityId, cityData)).toEqual(expectedAction);
+    expect(loadCityData(cityId, cityData)).toEqual(expectedAction);
   });
 
   it("creates fetching city data fail action", () => {
     const cityId = 3;
     const expectedAction = {
-      type: FETCHING_CITY_DATA_FAIL,
+      type: FETCH_CITY_DATA_ERROR,
       cityId
     };
-    expect(fetchCityDataFail(cityId)).toEqual(expectedAction);
+    expect(fetchCityDataError(cityId)).toEqual(expectedAction);
   });
 });
