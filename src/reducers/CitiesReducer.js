@@ -1,10 +1,10 @@
 import {
-  FETCHING_CITIES,
-  LOADED_CITIES,
-  FETCHING_CITIES_FAIL,
-  FETCHING_CITY_DATA,
-  LOADED_CITY_DATA,
-  FETCHING_CITY_DATA_FAIL
+  FETCH_CITIES,
+  LOAD_CITIES,
+  FETCH_CITIES_ERROR,
+  FETCH_CITY_DATA,
+  LOAD_CITY_DATA,
+  FETCH_CITY_DATA_ERROR
 } from "../actions/CitiesActions";
 
 export const defaultState = {
@@ -15,24 +15,24 @@ export const defaultState = {
 
 const CitiesReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case FETCHING_CITIES:
+    case FETCH_CITIES:
       return {
         ...state,
         citiesFetching: true
       };
-    case LOADED_CITIES:
+    case LOAD_CITIES:
       return {
         ...state,
         cities: action.cities,
         citiesFetching: false,
         citiesLoaded: true
       };
-    case FETCHING_CITIES_FAIL:
+    case FETCH_CITIES_ERROR:
       return {
         ...state,
         citiesFetching: false
       };
-    case FETCHING_CITY_DATA:
+    case FETCH_CITY_DATA:
       return {
         ...state,
         cities: state.cities.map(city =>
@@ -44,7 +44,7 @@ const CitiesReducer = (state = defaultState, action) => {
               }
         )
       };
-    case LOADED_CITY_DATA:
+    case LOAD_CITY_DATA:
       return {
         ...state,
         cities: state.cities.map(city =>
@@ -59,7 +59,7 @@ const CitiesReducer = (state = defaultState, action) => {
         )
       };
 
-    case FETCHING_CITY_DATA_FAIL:
+    case FETCH_CITY_DATA_ERROR:
       return {
         ...state,
         cities: state.cities.map(city =>

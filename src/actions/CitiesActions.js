@@ -1,38 +1,38 @@
 import { fetchCitiesOpenAq } from "../api/OpenAq";
 import { fetchCityWikiData } from "../api/WikiApi";
 
-export const FETCHING_CITIES = "FETCHING_CITIES";
+export const FETCH_CITIES = "FETCH_CITIES";
 export const fetchCities = () => ({
-  type: FETCHING_CITIES
+  type: FETCH_CITIES
 });
 
-export const LOADED_CITIES = "LOADED_CITIES";
-export const loadedCities = cities => ({
-  type: LOADED_CITIES,
+export const LOAD_CITIES = "LOAD_CITIES";
+export const loadCities = cities => ({
+  type: LOAD_CITIES,
   cities
 });
 
-export const FETCHING_CITIES_FAIL = "FETCHING_CITIES_FAIL";
-export const fetchCitiesFail = () => ({
-  type: FETCHING_CITIES_FAIL
+export const FETCH_CITIES_ERROR = "FETCH_CITIES_ERROR";
+export const fetchCitiesError = () => ({
+  type: FETCH_CITIES_ERROR
 });
 
-export const FETCHING_CITY_DATA = "FETCHING_CITY_DATA";
+export const FETCH_CITY_DATA = "FETCH_CITY_DATA";
 export const fetchCityData = cityId => ({
-  type: FETCHING_CITY_DATA,
+  type: FETCH_CITY_DATA,
   cityId
 });
 
-export const LOADED_CITY_DATA = "LOADED_CITY_DATA";
-export const loadedCityData = (cityId, cityData) => ({
-  type: LOADED_CITY_DATA,
+export const LOAD_CITY_DATA = "LOAD_CITY_DATA";
+export const loadCityData = (cityId, cityData) => ({
+  type: LOAD_CITY_DATA,
   cityId,
   cityData
 });
 
-export const FETCHING_CITY_DATA_FAIL = "FETCHING_CITY_DATA_FAIL";
-export const fetchCityDataFail = cityId => ({
-  type: FETCHING_CITY_DATA_FAIL,
+export const FETCH_CITY_DATA_ERROR = "FETCH_CITY_DATA_ERROR";
+export const fetchCityDataError = cityId => ({
+  type: FETCH_CITY_DATA_ERROR,
   cityId
 });
 
@@ -44,25 +44,25 @@ export const fetchAllCityData = (
   dispatch(fetchCities());
   fetchCitiesOpenAq(countryCode, resultLimit, parameter)
     .then(cities => {
-      dispatch(cities ? loadedCities(cities) : fetchCitiesFail());
+      dispatch(cities ? loadCities(cities) : fetchCitiesError());
       cities.forEach(city => {
         dispatch(fetchCityData(city.id));
         fetchCityWikiData(city.city)
           .then(cityData => {
             dispatch(
               cityData
-                ? loadedCityData(city.id, cityData)
-                : fetchCityDataFail(city.id)
+                ? loadCityData(city.id, cityData)
+                : fetchCityDataError(city.id)
             );
           })
           .catch(err => {
-            fetchCityDataFail(city.id);
-            console.log("failed to fetch city data", err);
+            fetchCityDataError(city.id);
+            console.error("failed to fetch city data", err);
           });
       });
     })
     .catch(err => {
-      fetchCitiesFail();
-      console.log("failed to fetch cities", err);
+      fetchCitiesError();
+      console.error("failed to fetch cities", err);
     });
 };
