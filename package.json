@@ -4,6 +4,8 @@
   "private": true,
   "homepage": "http://GrzegorzKazana.github.io/De-PM-ify",
   "dependencies": {
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1",
     "gh-pages": "^2.0.1",
     "node-sass": "^4.11.0",
     "prop-types": "^15.7.2",
