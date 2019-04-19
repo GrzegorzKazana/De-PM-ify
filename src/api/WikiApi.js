@@ -1,5 +1,9 @@
 import { stringifyUrlRequest } from "../utils/StringifyUrlRequest";
-import { assessCityDataQuiality } from "../utils/WikiDataPipelineHelpers";
+import {
+  assessCityDataQuiality,
+  removeSummaryStopWords
+} from "../utils/WikiDataPipelineHelpers";
+import { composeF } from "../utils/ComposeFunction";
 import { wikiOpenSearchApi } from "../config/Urls";
 
 export const fetchCityWikiData = async title => {
@@ -28,9 +32,7 @@ export const fetchCityWikiData = async title => {
       articleSummary: firstArticleSummary,
       articleUrl: firstArticleUrl
     };
-
-    const assessedCityData = assessCityDataQuiality(cityData);
-    return assessedCityData;
+    return composeF(assessCityDataQuiality, removeSummaryStopWords)(cityData);
   } catch (err) {
     return undefined;
   }
