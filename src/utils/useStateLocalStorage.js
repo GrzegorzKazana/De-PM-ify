@@ -1,13 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const useStateLocalStorage = (keyName, initialState) => {
-  const [state, setState] = useState(initialState);
-
-  //run on mount
-  useEffect(() => {
-    const localData = localStorage.getItem(keyName) || initialState;
-    setState(localData);
-  }, []);
+  const [state, setState] = useState(
+    localStorage.getItem(keyName) || initialState
+  );
 
   //wrap setState
   const setStateAndWriteLocal = newState => {
