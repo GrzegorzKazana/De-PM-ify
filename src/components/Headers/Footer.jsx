@@ -9,6 +9,7 @@ const Footer = () => (
       className={styles.Footer__hyperlink}
       href={openAqPageUrl}
       target="_blank"
+      rel="noopener noreferrer"
     >
       <OpenAqLogo className={styles.Footer__icon} />
     </a>
