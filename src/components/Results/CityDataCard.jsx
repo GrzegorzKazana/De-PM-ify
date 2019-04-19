@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 import CityDataCardSummary from "./CityDataCardSummary";
 import CityDataCardContent from "./CityDataCardContent";
 
-const CityDataCard = props => (
+const CityDataCard = ({ requestCityData, ...cityProps }) => (
   <details className={styles.CityDataCard__Wrapper}>
-    <CityDataCardSummary {...props} />
-    <CityDataCardContent {...props} />
+    <CityDataCardSummary {...cityProps} requestCityData={requestCityData} />
+    <CityDataCardContent {...cityProps} />
   </details>
 );
 export default CityDataCard;
@@ -24,5 +24,6 @@ export const cityPropTypes = {
 };
 
 CityDataCard.propTypes = {
-  ...cityPropTypes
+  ...cityPropTypes,
+  requestCityData: PropTypes.func.isRequired
 };
