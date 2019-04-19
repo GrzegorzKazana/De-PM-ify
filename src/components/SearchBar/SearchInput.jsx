@@ -4,6 +4,7 @@ import "./styles/ReactSelectStyles.scss";
 import styles from "./styles/SearchBar.module.scss";
 import PropTypes from "prop-types";
 import Autosuggest from "react-autosuggest";
+import Select from "react-select";
 import Spinner from "../Common/Spinner/Spinner";
 import {
   useStateLocalStorage,
@@ -17,13 +18,7 @@ import {
   findChoosenCountry,
   shouldRenderSuggestions
 } from "./SearchInputHelpers";
-import Select from "react-select";
-
-const options = [
-  { value: "asd", label: "asd" },
-  { value: "sdf", label: "sdf" },
-  { value: "dfg", label: "dfg" }
-];
+import AvailableParameters from "../../config/AvailableParameters";
 
 const SearchInput = ({ loading, onSubmit }) => {
   const [value, setValue] = useStateLocalStorage("input_value", "");
@@ -73,7 +68,7 @@ const SearchInput = ({ loading, onSubmit }) => {
       />
       <Select
         value={valueSelect}
-        options={options}
+        options={AvailableParameters}
         onChange={setValueSelect}
         placeholder="Parameter"
         className="react-select-container"
