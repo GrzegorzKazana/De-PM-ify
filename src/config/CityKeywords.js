@@ -15,3 +15,6 @@ export const cityKeywords = [
   "municipality",
   "prefecture"
 ];
+
+//list of words that need to be removed from article
+export const articleStopWords = ["(listen)"];

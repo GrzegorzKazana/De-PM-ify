@@ -1,4 +1,5 @@
-import { cityKeywords } from "../config/CityKeywords";
+import { cityKeywords, articleStopWords } from "../config/CityKeywords";
+import { removeOccurencesInString } from "./StringManipulation";
 
 //correct citydata is loaded successfully if articleSummary exists and is not falsy
 const isDataCorrect = city => city.articleSummary;
@@ -8,7 +9,7 @@ const isDataCorrect = city => city.articleSummary;
 //also, if article does not contain any "city" or "province" synonym
 //it is highly indicative, the result may not be about requested city
 const isDataAmbigious = city =>
-  city.articleSummary.includes("refer to") ||
+  city.articleSummary.includes("refer") ||
   !cityKeywords
     .map(keyword => city.articleSummary.includes(keyword))
     .some(x => x);
@@ -29,3 +30,11 @@ export const assessCityDataQuiality = city => {
     isInvalid
   };
 };
+
+export const removeSummaryStopWords = city => ({
+  ...city,
+  articleSummary: removeOccurencesInString(
+    city.articleSummary,
+    articleStopWords
+  )
+});
