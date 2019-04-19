@@ -1,5 +1,5 @@
 import { fetchCitiesOpenAq } from "../api/OpenAq";
-import { fetchCityWikiData } from "../api/WikiApi";
+import { fetchCityWikiData as fetchCityWikiDataApiCall } from "../api/WikiApi";
 
 export const FETCH_CITIES = "FETCH_CITIES";
 export const fetchCities = () => ({
@@ -52,9 +52,9 @@ export const fetchCityList = (
     });
 };
 
-export const fetchCityWikiData = city => {
+export const fetchCityWikiData = city => dispatch => {
   dispatch(fetchCityData(city.id));
-  fetchCityWikiData(city.city)
+  fetchCityWikiDataApiCall(city.city)
     .then(cityData => {
       dispatch(
         cityData ? loadCityData(city.id, cityData) : fetchCityDataError(city.id)
