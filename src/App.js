@@ -7,7 +7,7 @@ import SearchBar from "./components/SearchBar/SearchBar";
 import Results from "./components/Results/Results";
 
 import { connect } from "react-redux";
-import { fetchAllCityData } from "./actions/CitiesActions";
+import { fetchCityList, fetchCityWikiData } from "./actions/CitiesActions";
 
 const App = props => {
   const resultBodyRef = React.createRef();
@@ -30,6 +30,7 @@ const App = props => {
         open={props.citiesLoaded}
         cities={props.cities}
         inputRef={resultBodyRef}
+        requestCityData={props.fetchCityData}
       />
       <Footer />
     </div>
@@ -39,7 +40,8 @@ const App = props => {
 const mapStateToProps = state => state;
 
 const mapDispatchToProps = dispatch => ({
-  fetchCities: countryCode => dispatch(fetchAllCityData(countryCode, 10))
+  fetchCities: countryCode => dispatch(fetchCityList(countryCode, 10)),
+  fetchCityData: city => dispatch(fetchCityWikiData(city))
 });
 
 export default connect(
@@ -48,5 +50,6 @@ export default connect(
 )(App);
 
 App.propTypes = {
-  fetchCities: PropTypes.func.isRequired
+  fetchCities: PropTypes.func.isRequired,
+  fetchCityData: PropTypes.func.isRequired
 };

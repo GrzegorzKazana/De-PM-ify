@@ -5,7 +5,10 @@ import CityDataCardSummary from "./CityDataCardSummary";
 import CityDataCardContent from "./CityDataCardContent";
 
 const CityDataCard = props => (
-  <details className={styles.CityDataCard__Wrapper}>
+  <details
+    className={styles.CityDataCard__Wrapper}
+    onClick={() => props.requestCityData(props.city)}
+  >
     <CityDataCardSummary {...props} />
     <CityDataCardContent {...props} />
   </details>
