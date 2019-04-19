@@ -40,7 +40,8 @@ const App = props => {
 const mapStateToProps = state => state;
 
 const mapDispatchToProps = dispatch => ({
-  fetchCities: countryCode => dispatch(fetchCityList(countryCode, 10)),
+  fetchCities: (countryCode, parameter) =>
+    dispatch(fetchCityList(countryCode, 10, parameter)),
   fetchCityData: city => dispatch(fetchCityWikiData(city))
 });
 

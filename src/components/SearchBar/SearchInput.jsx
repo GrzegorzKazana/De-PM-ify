@@ -41,7 +41,9 @@ const SearchInput = ({ loading, onSubmit }) => {
 
   const handleSubmit = e => {
     const choosenCountry = findChoosenCountry(value);
-    choosenCountry ? onSubmit(choosenCountry.code) : setInputValid(false);
+    choosenCountry
+      ? onSubmit(choosenCountry.code, valueSelect.value)
+      : setInputValid(false);
     e.preventDefault();
   };
 
