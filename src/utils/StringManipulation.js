@@ -9,3 +9,9 @@ export const fixCapitalization = string =>
     .join(" ");
 
 export const takeUntilChar = (string, char) => string.split(char)[0];
+
+export const takeFirstSentences = (text, nSentences) =>
+  text
+    .split(". ")
+    .slice(0, nSentences)
+    .join(". ");

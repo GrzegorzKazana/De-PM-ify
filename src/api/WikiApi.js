@@ -3,6 +3,7 @@ import {
   assessCityDataQuiality,
   removeSummaryStopWords
 } from "../utils/WikiDataPipelineHelpers";
+import { takeFirstSentences } from "../utils/StringManipulation";
 import { composeF } from "../utils/ComposeFunction";
 import { wikiOpenSearchApi } from "../config/Urls";
 
@@ -13,31 +14,28 @@ const defaultError = err => ({
 
 export const fetchCityWikiData = async title => {
   const params = {
-    action: "opensearch",
+    action: "query",
     format: "json",
+    prop: ["extracts", "exintro", "explaintext", "redirects"],
     origin: "*",
-    search: title
+    titles: title
   };
   const url = stringifyUrlRequest(wikiOpenSearchApi, params);
   try {
-    const titlesResponse = await fetch(url);
-    const titlesJson = await titlesResponse.json();
-    const firstAtricleTitle = titlesJson[1][0];
-    const firstArticleSummary = titlesJson[2][0];
-    const firstArticleUrl = titlesJson[3][0];
-    if (
-      [firstAtricleTitle, firstArticleSummary, firstArticleUrl].some(
-        res => res === undefined
-      )
-    ) {
-      throw defaultError();
-    }
-    const cityData = {
-      articleTitle: firstAtricleTitle,
-      articleSummary: firstArticleSummary,
-      articleUrl: firstArticleUrl
-    };
-    return composeF(assessCityDataQuiality, removeSummaryStopWords)(cityData);
+    const cityDataResponse = await fetch(url);
+    const cityDataJson = await cityDataResponse.json();
+    const cityData = composeF(
+      x => x.query.pages,
+      x => x[Object.keys(x)[0]],
+      x => ({
+        articeTitle: x.title,
+        articleSummary: takeFirstSentences(x.extract || "", 1),
+        articeId: x.pageid
+      }),
+      assessCityDataQuiality,
+      removeSummaryStopWords
+    )(cityDataJson);
+    return cityData;
   } catch (err) {
     throw defaultError(err);
   }
