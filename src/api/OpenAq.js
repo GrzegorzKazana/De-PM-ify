@@ -1,6 +1,7 @@
 import { stringifyUrlRequest } from "../utils/StringifyUrlRequest";
 import {
   formatResults,
+  filterOldMeasurements,
   sortResults,
   limitAndFilterCityDuplicates,
   formatCityNames,
@@ -26,6 +27,7 @@ export const fetchCitiesOpenAq = async (
     const processedCities = composeF(
       x => x.results,
       formatResults,
+      filterOldMeasurements,
       formatCityNames,
       sortResults,
       x => limitAndFilterCityDuplicates(x, limitTopResults),

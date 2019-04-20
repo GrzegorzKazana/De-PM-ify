@@ -15,8 +15,12 @@ export const formatResults = results =>
     location: res.location,
     parameter: res.measurements[0].parameter,
     value: res.measurements[0].value,
-    unit: res.measurements[0].unit
+    unit: res.measurements[0].unit,
+    lastUpdated: res.measurements[0].lastUpdated
   }));
+
+const filterOldMeasurements = cities =>
+  cities.filter(city => city.lastUpdated.includes("2019"));
 
 //sorts result array by measurement in descending order
 //(worse air quality first)
