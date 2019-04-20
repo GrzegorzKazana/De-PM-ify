@@ -9,6 +9,8 @@ const CityDataSummary = ({ city, requestCityData }) => {
     !city.dataLoaded && requestCityData(city);
   };
 
+  const [measurementData, measurementTime] = city.lastUpdated.split("T");
+
   return (
     <summary
       className={styles.CityDataCard__Summary}
@@ -18,13 +20,18 @@ const CityDataSummary = ({ city, requestCityData }) => {
       <div className={styles.CityDataCard__Header}>
         <span className={styles.CityDataCard__Cityname}>{city.city}</span>
         <div>
-          <span className={styles.CityDataCard__Parameter}>
-            {city.parameter}:&nbsp;
-          </span>
-          <span className={styles.CityDataCard__Value}>
-            {Math.round(city.value)}
-          </span>
-          <span className={styles.CityDataCard__Unit}>{city.unit}</span>
+          <div>
+            <span className={styles.CityDataCard__Parameter}>
+              {city.parameter.toUpperCase()}:&nbsp;
+            </span>
+            <span className={styles.CityDataCard__Value}>
+              {Math.round(city.value)}
+            </span>
+            <span className={styles.CityDataCard__Unit}>{city.unit}</span>
+          </div>
+          <div className={styles.CityDataCard__TimeStamp}>
+            {measurementData + ", " + measurementTime.slice(0, 5)}
+          </div>
         </div>
       </div>
     </summary>
