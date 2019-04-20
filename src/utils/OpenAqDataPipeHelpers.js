@@ -1,9 +1,4 @@
-import {
-  removeOccurencesInString,
-  fixCapitalization,
-  takeUntilChar
-} from "../utils/StringManipulation";
-import { redundantCityPrefixes } from "../config/RedundantCityPrefixes";
+import { takeUntilChar } from "../utils/StringManipulation";
 import uuid from "uuid";
 
 //formats result array to simpler form
@@ -54,16 +49,12 @@ export const limitAndFilterCityDuplicates = (results, limit) => {
   return filteredResults;
 };
 
+//some cities have names in two languages,
+//use only first translation
 export const formatCityNames = cities =>
   cities.map(city => ({
     ...city,
-    city: takeUntilChar(
-      removeOccurencesInString(
-        fixCapitalization(city.city),
-        redundantCityPrefixes
-      ),
-      "/"
-    )
+    city: takeUntilChar(city.city, "/")
   }));
 
 //adds id, empty data and fetch status to city objects
