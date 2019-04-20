@@ -19,7 +19,7 @@ export const formatResults = results =>
     lastUpdated: res.measurements[0].lastUpdated
   }));
 
-const filterOldMeasurements = cities =>
+export const filterOldMeasurements = cities =>
   cities.filter(city => city.lastUpdated.includes("2019"));
 
 //sorts result array by measurement in descending order
