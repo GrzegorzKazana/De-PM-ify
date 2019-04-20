@@ -23,16 +23,14 @@ const CityDataSummary = ({ city, requestCityData }) => {
         <span className={styles.CityDataCard__Cityname}>{city.city}</span>
         <div>
           <div>
-            <span className={styles.CityDataCard__Parameter}>
-              {city.parameter.toUpperCase()}:&nbsp;
-            </span>
+            <span>{city.parameter.toUpperCase()}:&nbsp;</span>
             <span
               className={styles.CityDataCard__Value}
               style={{ color: parameterToColor(city.value, city.parameter) }}
             >
               {Math.round(city.value)}
             </span>
-            <span className={styles.CityDataCard__Unit}>{city.unit}</span>
+            <span>{city.unit}</span>
           </div>
           <div className={styles.CityDataCard__TimeStamp}>
             {measurementData + ", " + measurementTimeHHMM}
