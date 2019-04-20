@@ -14,11 +14,8 @@ export const fetchCitiesOpenAq = async (
   limitTopResults = 10,
   parameter = "pm25"
 ) => {
-  //limit is set to ridicolus value (api max),
-  //to make sure every location gets fetched
   const params = {
     country: countryCode,
-    limit: 10000,
     order_by: "measurements[0]value",
     sort: "desc",
     parameter

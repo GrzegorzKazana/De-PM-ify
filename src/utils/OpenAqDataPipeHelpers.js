@@ -19,8 +19,14 @@ export const formatResults = results =>
     lastUpdated: res.measurements[0].lastUpdated
   }));
 
+//filters out measurements older than month
 export const filterOldMeasurements = cities =>
-  cities.filter(city => city.lastUpdated.includes("2019"));
+  cities.filter(city => {
+    const measurementDate = new Date(city.lastUpdated);
+    const today = new Date();
+    const monthAgo = new Date().setDate(today.getDate() - 30);
+    return measurementDate > monthAgo;
+  });
 
 //sorts result array by measurement in descending order
 //(worse air quality first)
