@@ -9,6 +9,7 @@ import { Snackbar } from "react-redux-snackbar";
 
 import { connect } from "react-redux";
 import { fetchCityList, fetchCityWikiData } from "./actions/CitiesActions";
+import { displaySnackbarMessage } from "./actions/SnackbarActions";
 
 const App = props => {
   const resultBodyRef = React.createRef();
@@ -39,12 +40,13 @@ const App = props => {
   );
 };
 
-const mapStateToProps = state => ({ ...state.cities, ...state.snackbar });
+const mapStateToProps = state => ({ ...state.cities });
 
 const mapDispatchToProps = dispatch => ({
   fetchCities: (countryCode, parameter) =>
     dispatch(fetchCityList(countryCode, 10, parameter)),
-  fetchCityData: city => dispatch(fetchCityWikiData(city))
+  fetchCityData: city => dispatch(fetchCityWikiData(city)),
+  displayMessage: message => dispatch(displaySnackbarMessage(message))
 });
 
 export default connect(
