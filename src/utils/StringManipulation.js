@@ -7,4 +7,4 @@ export const takeFirstSentences = (text, nSentences) =>
   text
     .split(". ")
     .slice(0, nSentences)
-    .join(". ");
+    .join(". ") + ". ";
