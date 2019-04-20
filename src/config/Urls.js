@@ -4,4 +4,6 @@ export const wikiOpenSearchApi = "https://en.wikipedia.org/w/api.php";
 
 export const wikiSearchUrl = "https://en.wikipedia.org/w/index.php?search=";
 
+export const wikiArticleByPageId = "https://en.wikipedia.org/?curid=";
+
 export const openAqPageUrl = "https://openaq.org/";

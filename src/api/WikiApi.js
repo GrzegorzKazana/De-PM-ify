@@ -5,7 +5,7 @@ import {
 } from "../utils/WikiDataPipelineHelpers";
 import { takeFirstSentences } from "../utils/StringManipulation";
 import { composeF } from "../utils/ComposeFunction";
-import { wikiOpenSearchApi } from "../config/Urls";
+import { wikiOpenSearchApi, wikiArticleByPageId } from "../config/Urls";
 
 const defaultError = err => ({
   ...err,
@@ -30,7 +30,7 @@ export const fetchCityWikiData = async title => {
       x => ({
         articeTitle: x.title,
         articleSummary: takeFirstSentences(x.extract || "", 1),
-        articeId: x.pageid
+        articleUrl: wikiArticleByPageId + x.pageid
       }),
       assessCityDataQuiality,
       removeSummaryStopWords
