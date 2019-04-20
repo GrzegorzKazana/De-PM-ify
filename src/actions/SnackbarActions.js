@@ -1,4 +1,4 @@
-import { showSnack, dismissSnack } from "react-redux-snackbar";
+import { showSnack } from "react-redux-snackbar";
 import uuid from "uuid";
 
 const defaultTimeout = 5000;
