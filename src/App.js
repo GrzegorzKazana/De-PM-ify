@@ -39,7 +39,7 @@ const App = props => {
   );
 };
 
-const mapStateToProps = state => state.cities;
+const mapStateToProps = state => ({ ...state.cities, ...state.snackbar });
 
 const mapDispatchToProps = dispatch => ({
   fetchCities: (countryCode, parameter) =>
