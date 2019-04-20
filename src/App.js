@@ -10,7 +10,6 @@ import { DEFAULT_CITIES_TOP_LIMIT } from "./config/Misc";
 
 import { connect } from "react-redux";
 import { fetchCityList, fetchCityWikiData } from "./actions/CitiesActions";
-import { displaySnackbarMessage } from "./actions/SnackbarActions";
 
 const App = props => {
   const resultBodyRef = React.createRef();
