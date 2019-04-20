@@ -2,7 +2,6 @@ import { stringifyUrlRequest } from "../utils/StringifyUrlRequest";
 import {
   formatResults,
   filterOldMeasurements,
-  sortResults,
   limitAndFilterCityDuplicates,
   formatCityNames,
   wrapCitiesWithIdEmptyData
@@ -15,9 +14,13 @@ export const fetchCitiesOpenAq = async (
   limitTopResults = 10,
   parameter = "pm25"
 ) => {
+  //limit is set to ridicolus value (api max),
+  //to make sure every location gets fetched
   const params = {
     country: countryCode,
     limit: 10000,
+    order_by: "measurements[0]value",
+    sort: "desc",
     parameter
   };
   const url = stringifyUrlRequest(openAqLatestApi, params);
@@ -29,7 +32,6 @@ export const fetchCitiesOpenAq = async (
       formatResults,
       filterOldMeasurements,
       formatCityNames,
-      sortResults,
       x => limitAndFilterCityDuplicates(x, limitTopResults),
       wrapCitiesWithIdEmptyData
     )(latestJson);
