@@ -7,7 +7,7 @@ export const fixCapitalization = string =>
     .split(" ")
     .map(s => s.charAt(0).toUpperCase() + s.substring(1))
     .join(" ")
-    .replace(/-([a-z])/, (match, g1) => "-" + g1.toUpperCase());
+    .replace(/-([a-z])/, (_, g1) => "-" + g1.toUpperCase());
 
 export const takeUntilChar = (string, char) => string.split(char)[0];
 
