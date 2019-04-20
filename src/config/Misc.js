@@ -1,0 +1,1 @@
+export const DEFAULT_CITIES_TOP_LIMIT = 10;

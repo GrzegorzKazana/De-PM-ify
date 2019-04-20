@@ -6,6 +6,7 @@ import Footer from "./components/Headers/Footer";
 import SearchBar from "./components/SearchBar/SearchBar";
 import Results from "./components/Results/Results";
 import { Snackbar } from "react-redux-snackbar";
+import { DEFAULT_CITIES_TOP_LIMIT } from "./config/Misc";
 
 import { connect } from "react-redux";
 import { fetchCityList, fetchCityWikiData } from "./actions/CitiesActions";
@@ -44,7 +45,7 @@ const mapStateToProps = state => ({ ...state.cities });
 
 const mapDispatchToProps = dispatch => ({
   fetchCities: (countryCode, parameter) =>
-    dispatch(fetchCityList(countryCode, 10, parameter)),
+    dispatch(fetchCityList(countryCode, DEFAULT_CITIES_TOP_LIMIT, parameter)),
   fetchCityData: city => dispatch(fetchCityWikiData(city)),
   displayMessage: message => dispatch(displaySnackbarMessage(message))
 });
