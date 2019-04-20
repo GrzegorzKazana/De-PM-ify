@@ -33,6 +33,10 @@ export const fetchCitiesOpenAq = async (
     )(latestJson);
     return processedCities;
   } catch (err) {
-    return [];
+    const error = {
+      err,
+      message: "Failed to fetch city list."
+    };
+    throw error;
   }
 };
