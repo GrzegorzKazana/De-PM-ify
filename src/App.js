@@ -46,8 +46,7 @@ const mapStateToProps = state => ({ ...state.cities });
 const mapDispatchToProps = dispatch => ({
   fetchCities: (countryCode, parameter) =>
     dispatch(fetchCityList(countryCode, DEFAULT_CITIES_TOP_LIMIT, parameter)),
-  fetchCityData: city => dispatch(fetchCityWikiData(city)),
-  displayMessage: message => dispatch(displaySnackbarMessage(message))
+  fetchCityData: city => dispatch(fetchCityWikiData(city))
 });
 
 export default connect(
