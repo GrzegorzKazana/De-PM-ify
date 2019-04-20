@@ -13,7 +13,8 @@ export const cityKeywords = [
   "state",
   "county",
   "municipality",
-  "prefecture"
+  "prefecture",
+  "community"
 ];
 
 //list of words that need to be removed from article
