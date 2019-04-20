@@ -1,4 +1,5 @@
 import { fetchCitiesOpenAq } from "../api/OpenAq";
+import { displaySnackbarMessage } from "./SnackbarActions";
 import { fetchCityWikiData as fetchCityWikiDataApiCall } from "../api/WikiApi";
 
 export const FETCH_CITIES = "FETCH_CITIES";
@@ -48,6 +49,7 @@ export const fetchCityList = (
     })
     .catch(err => {
       fetchCitiesError();
+      dispatch(displaySnackbarMessage("An error occured."));
       console.error("failed to fetch cities", err);
     });
 };
@@ -62,6 +64,7 @@ export const fetchCityWikiData = city => dispatch => {
     })
     .catch(err => {
       fetchCityDataError(city.id);
+      dispatch(displaySnackbarMessage("An error occured."));
       console.error("failed to fetch city data", err);
     });
 };
