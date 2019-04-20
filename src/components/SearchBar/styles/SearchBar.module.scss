@@ -5,7 +5,6 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  // flex-wrap: wrap;
 }
 
 .SearchInput__Button {
@@ -35,7 +34,6 @@
   color: #000;
   cursor: pointer;
   padding: 10px 10px;
-  // color: red;
 }
 
 .SearchBar__Wrapper {
@@ -47,5 +45,5 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  // color: red;
+  z-index: 2;
 }
