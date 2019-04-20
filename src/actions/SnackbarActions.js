@@ -6,5 +6,5 @@ export const displaySnackbarMessage = message =>
   showSnack(uuid.v4(), {
     label: message,
     timeout: defaultTimeout,
-    button: { label: "ok" }
+    button: { label: "OK" }
   });

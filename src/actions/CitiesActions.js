@@ -44,27 +44,21 @@ export const fetchCityList = (
 ) => dispatch => {
   dispatch(fetchCities());
   fetchCitiesOpenAq(countryCode, resultLimit, parameter)
-    .then(cities => {
-      dispatch(cities ? loadCities(cities) : fetchCitiesError());
-    })
+    .then(cities => dispatch(loadCities(cities)))
     .catch(err => {
-      fetchCitiesError();
-      dispatch(displaySnackbarMessage("An error occured."));
-      console.error("failed to fetch cities", err);
+      dispatch(fetchCitiesError());
+      dispatch(displaySnackbarMessage(err.message));
+      console.error(err);
     });
 };
 
 export const fetchCityWikiData = city => dispatch => {
   dispatch(fetchCityData(city.id));
   fetchCityWikiDataApiCall(city.city)
-    .then(cityData => {
-      dispatch(
-        cityData ? loadCityData(city.id, cityData) : fetchCityDataError(city.id)
-      );
-    })
+    .then(cityData => dispatch(loadCityData(city.id, cityData)))
     .catch(err => {
-      fetchCityDataError(city.id);
-      dispatch(displaySnackbarMessage("An error occured."));
-      console.error("failed to fetch city data", err);
+      dispatch(fetchCityDataError(city.id));
+      dispatch(displaySnackbarMessage(err.message));
+      console.error(err);
     });
 };

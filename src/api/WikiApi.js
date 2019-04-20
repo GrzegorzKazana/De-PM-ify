@@ -6,6 +6,11 @@ import {
 import { composeF } from "../utils/ComposeFunction";
 import { wikiOpenSearchApi } from "../config/Urls";
 
+const defaultError = err => ({
+  ...err,
+  message: "Failed to fetch city data."
+});
+
 export const fetchCityWikiData = async title => {
   const params = {
     action: "opensearch",
@@ -25,7 +30,7 @@ export const fetchCityWikiData = async title => {
         res => res === undefined
       )
     ) {
-      return undefined;
+      throw defaultError();
     }
     const cityData = {
       articleTitle: firstAtricleTitle,
@@ -34,6 +39,6 @@ export const fetchCityWikiData = async title => {
     };
     return composeF(assessCityDataQuiality, removeSummaryStopWords)(cityData);
   } catch (err) {
-    return undefined;
+    throw defaultError(err);
   }
 };
