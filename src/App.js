@@ -5,6 +5,7 @@ import Header from "./components/Headers/Header";
 import Footer from "./components/Headers/Footer";
 import SearchBar from "./components/SearchBar/SearchBar";
 import Results from "./components/Results/Results";
+import { Snackbar } from "react-redux-snackbar";
 
 import { connect } from "react-redux";
 import { fetchCityList, fetchCityWikiData } from "./actions/CitiesActions";
@@ -33,11 +34,12 @@ const App = props => {
         requestCityData={props.fetchCityData}
       />
       <Footer />
+      <Snackbar />
     </div>
   );
 };
 
-const mapStateToProps = state => state;
+const mapStateToProps = state => state.cities;
 
 const mapDispatchToProps = dispatch => ({
   fetchCities: (countryCode, parameter) =>
