@@ -16,19 +16,19 @@ self.__precacheManifest = [
     "url": "/De-PM-ify/static/js/runtime~main.7b1a5852.js"
   },
   {
-    "revision": "91e50e44919e03880df9",
-    "url": "/De-PM-ify/static/js/main.d33f7a09.chunk.js"
+    "revision": "a07532ab0d53e230ffd7",
+    "url": "/De-PM-ify/static/js/main.3764f802.chunk.js"
   },
   {
     "revision": "49b372caa46ae0949cb8",
     "url": "/De-PM-ify/static/js/2.aaf97813.chunk.js"
   },
   {
-    "revision": "91e50e44919e03880df9",
+    "revision": "a07532ab0d53e230ffd7",
     "url": "/De-PM-ify/static/css/main.54ebc383.chunk.css"
   },
   {
-    "revision": "0cdd4b01c64fd4bda33c767940afb8e3",
+    "revision": "b80fb6c259c5d1ebc518c091a8260d44",
     "url": "/De-PM-ify/index.html"
   }
 ];
