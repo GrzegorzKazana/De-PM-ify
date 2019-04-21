@@ -23,7 +23,7 @@ const CityDataSummary = ({ city, requestCityData }) => {
         <span className={styles.CityDataCard__Cityname}>{city.city}</span>
         <div>
           <div>
-            <span>{city.parameter.toUpperCase()}:&nbsp;</span>
+            <span>{city.parameterLabel}:&nbsp;</span>
             <span
               className={styles.CityDataCard__Value}
               style={{ color: parameterToColor(city.value, city.parameter) }}

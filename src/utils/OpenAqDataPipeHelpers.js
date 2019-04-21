@@ -1,4 +1,5 @@
 import { takeUntilChar } from "../utils/StringManipulation";
+import AvailableParameters from "../config/AvailableParameters";
 import uuid from "uuid";
 
 //formats result array to simpler form
@@ -62,6 +63,9 @@ export const wrapCitiesWithIdEmptyData = cities =>
   cities.map(city => ({
     ...city,
     id: uuid.v4(),
+    parameterLabel: AvailableParameters.find(
+      param => param.value === city.parameter
+    ).label,
     data: {},
     dataFetching: false,
     dataLoaded: false
