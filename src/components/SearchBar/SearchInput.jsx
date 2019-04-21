@@ -75,6 +75,7 @@ const SearchInput = ({ loading, onSubmit }) => {
         placeholder="Parameter"
         className="react-select-container"
         classNamePrefix="react-select"
+        isSearchable={false}
       />
       <button className={styles.SearchInput__Button}>
         {loading ? <Spinner /> : <SearchIcon />}
