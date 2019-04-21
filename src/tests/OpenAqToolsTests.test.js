@@ -1,9 +1,7 @@
 import {
   formatResults,
-  sortResults,
-  limitAndFilterCityDuplicates,
-  wrapCitiesWithIdEmptyData,
-  formatCityNames
+  sortResultsByValue,
+  limitAndFilterCityDuplicates
 } from "../utils/OpenAqDataPipeHelpers";
 
 describe("testing openaq data pipes", () => {
@@ -155,7 +153,7 @@ describe("testing openaq data pipes", () => {
         unit: "µg/m³"
       }
     ];
-    expect(sortResults(rawResults)).toEqual(expectedResults);
+    expect(sortResultsByValue(rawResults)).toEqual(expectedResults);
   });
 
   it("limits and filters duplicates", () => {
