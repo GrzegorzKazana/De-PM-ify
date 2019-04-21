@@ -26,12 +26,12 @@ export const filterOldMeasurements = cities =>
 
 //sorts result array by measurement in descending order
 //(worse air quality first)
-export const sortResults = results =>
+export const sortResultsByValue = results =>
   results.sort((resA, resB) => resB.value - resA.value);
 
 //iterates the array and checks if current city has previous occurence with different measurement
-//skips duplicates, leaving occurence with worse params
-//assumes data is sorted by air quality
+//skips duplicates, leaving first occurence (if data is sorted by parameter value
+//then it leaves occurence with worse aq, if sorted by date, leaves newer one),
 //also, iteration ends if collected enough cities (reached limit)
 export const limitAndFilterCityDuplicates = (results, limit) => {
   const filteredResults = [];
