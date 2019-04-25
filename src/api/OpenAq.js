@@ -4,7 +4,6 @@ import {
   filterOldMeasurements,
   limitAndFilterCityDuplicates,
   formatCityNames,
-  sortResultsByValue,
   wrapCitiesWithIdEmptyData
 } from "../utils/OpenAqDataPipeHelpers";
 import { openAqLatestApi } from "../config/Urls";
@@ -17,7 +16,7 @@ export const fetchCitiesOpenAq = async (
 ) => {
   const params = {
     country: countryCode,
-    order_by: "measurements[0]lastUpdated",
+    order_by: "measurements[0]value",
     sort: "desc",
     parameter
   };
@@ -31,7 +30,6 @@ export const fetchCitiesOpenAq = async (
       filterOldMeasurements,
       formatCityNames,
       x => limitAndFilterCityDuplicates(x, limitTopResults),
-      sortResultsByValue,
       wrapCitiesWithIdEmptyData
     )(latestJson);
     return processedCities;
